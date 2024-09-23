@@ -5,18 +5,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 
 
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
+    RouterOutlet,
    
-    RouterOutlet
   ], 
   providers:[
-
+  
   ], 
   bootstrap:[/* Your Main Component */]
 })

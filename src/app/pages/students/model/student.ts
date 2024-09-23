@@ -1,10 +1,16 @@
-export class Student {
+export interface Student {
     
-    private vorname: string;
-    private lastname: string;
+     id: number;
+     firstName: string;
+     lastName: string ;
+     email: string ;
+     phone: string ;
+     fileName: string ;
+     addedOn: Date;
+     modifiedOn: Date;
+     matNumber: string;
+     active:boolean;
+     insertedBy:string;
 
-    constructor(){
-
-    }
     
 }

@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.sass'
+  styleUrl: './forgot-password.component.scss'
 })
 export class ForgotPasswordComponent {
 

@@ -6,6 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -13,6 +14,10 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(), 
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
-    importProvidersFrom(ReactiveFormsModule), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync(),
+    importProvidersFrom(ReactiveFormsModule), 
+    provideAnimations(),
+    provideHttpClient(),
+    provideAnimationsAsync()
+
   ]
 };

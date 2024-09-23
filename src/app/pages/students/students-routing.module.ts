@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AllStudentsComponent } from './all-students/all-students.component';
 import { StudentDetailsComponent } from './student-details/student-details.component';
+import { StudentListComponent } from './student-list/student-list.component';
 
 
 export const routes: Routes = [
 
 {
   path: "",
-  component: AllStudentsComponent  
+  component: StudentListComponent  
   },
   {
     path: "details/:id",

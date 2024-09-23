@@ -56,7 +56,7 @@ export class AuthenticationService {
     if (isPlatformBrowser(this.platformId)) {
 
     const token = sessionStorage.getItem(this.tokenKey);
-    return !!token && !this.isTokenExpired(token);
+    return !!token;  //&& !this.isTokenExpired(token);
     }
     return false;
   }

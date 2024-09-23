@@ -1,1 +1,38 @@
-<p>student-card-list works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let student of students">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ student.firstName }} {{ student.lastName }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Matriculation Number: {{ student.matNumber }}</h6>
+          <p class="card-text">
+            <strong>Added On:</strong> {{ student.addedOn | date: 'longDate' }}<br>
+            <strong>Modified On:</strong> {{ student.modifiedOn | date: 'longDate' }}<br>
+            <strong>Status:</strong>
+            <span [ngClass]="student.active ? 'badge bg-success' : 'badge bg-danger'">
+              {{ student.active ? 'Active' : 'Inactive' }}
+            </span><br>
+            <strong>Inserted By:</strong> {{ student.insertedBy }}
+          </p>
+          <a href="#" class="btn btn-primary" *ngIf="student.active">View Profile</a>
+          <a href="#" class="btn btn-secondary">Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <h2>Students</h2>
+
+<div *ngFor="let student of students">
+  <div class="student-card">
+    <h3>{{ student.firstName }} {{ student.lastName }}</h3>
+    <p>Matriculation Number: {{ student.matNumber }}</p>
+    <p>Added On: {{ student.addedOn | date: 'longDate' }}</p>
+    <p>Modified On: {{ student.modifiedOn | date: 'longDate' }}</p>
+    <p>Status: {{ student.active ? 'Active' : 'Inactive' }}</p>
+  </div>
+</div> -->
+
+  

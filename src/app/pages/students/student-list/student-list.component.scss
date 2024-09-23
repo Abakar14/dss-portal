@@ -1,0 +1,40 @@
+// @import '@angular/material/prebuilt-themes/indigo-pink.css'
+
+.student-list-container 
+  display: flex
+  flex-direction: column
+  gap: 20px
+  padding: 20px
+
+  .mat-table 
+    width: 100%
+    margin-top: 20px
+    border-collapse: collapse
+
+
+    .mat-header-cell 
+      font-weight: bold 
+      color: #ffffff
+      background-color: #3f51b5 /* Material primary color */
+
+
+    .mat-cell 
+      font-size: 18px
+      padding: 20px
+      border-bottom: 1px solid #ddd
+
+
+    .mat-header-row 
+      height: 56px
+
+
+      .mat-row:hover 
+        background-color: #62ba39 /* Highlight row on hover */
+
+    .mat-paginator 
+      margin-top: 20px
+
+    .mat-button 
+      margin-right: 10px
+
+

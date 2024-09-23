@@ -1,0 +1,15 @@
+section {
+  background-color: #9A616D;
+}
+
+button {
+  background-color: rgba(168, 138, 107, 0.862745098);
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.fas {
+  color: #ff6219;
+}/*# sourceMappingURL=login.component.css.map */

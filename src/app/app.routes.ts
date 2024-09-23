@@ -5,14 +5,12 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guards/auth.guard';
 import { AboutComponent } from './pages/about/about.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { LogoutComponent } from './pages/logout/logout.component';
 
 export const routes: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-   { path: 'logout', component: LogoutComponent },
-   { path: 'about', component: AboutComponent },
-   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent }, 
+  
   {
     path: '',
     component: LayoutComponent,
@@ -20,7 +18,10 @@ export const routes: Routes = [
     children: [
       { path: 'students', 
         loadChildren: () => import("../app/pages/students/students.module").then(m => m.StudentsModule)
-      }
+      },
+      { path: '', redirectTo: '/students', pathMatch: 'full' }, // Default route
+      // { path: '**', redirectTo: '/students' }, // Wildcard route for 404
+      { path: 'about', component: AboutComponent },
     ],
   },
 
