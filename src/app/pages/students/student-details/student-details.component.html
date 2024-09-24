@@ -1,1 +1,11 @@
-<p>student-details works!</p>
+<div class="container">
+    <h2>{{ student?.firstName }} {{ student?.lastName }}</h2>
+    <p><strong>Matriculation Number:</strong> {{ student?.matNumber }}</p>
+    <p><strong>Email:</strong> {{ student?.email }}</p>
+    <p><strong>Phone:</strong> {{ student?.phone }}</p>
+    <!-- <p><strong>Address:</strong> {{ student?.address }}</p> -->
+    <button type="button" routerLink="/students" class="btn btn-secondary">Back to List</button>
+ 
+      
+  </div>
+  

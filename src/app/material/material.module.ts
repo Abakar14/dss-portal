@@ -6,11 +6,12 @@ import {  MatDialogModule } from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
+import { MatSort } from '@angular/material/sort';
 
 const MaterialComponents = [
   MatButtonModule,  
@@ -24,11 +25,9 @@ const MaterialComponents = [
   MatTooltip,
   MatCardModule,
   MatGridListModule,
-  MatInputModule
-
-  
-  
-  
+  MatInputModule,
+  MatSort,
+  MatPaginator  
 ]
 
 @NgModule({

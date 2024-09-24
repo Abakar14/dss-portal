@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { DssCookieService } from './dss-cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ export class AuthenticationService {
   private authUrl = 'http://localhost:8081/dss/api/v1/auth';
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
+  cookieService = inject(DssCookieService);
+  cookieTokenDays = 2;
+  cookieRefreshTokenDays = 2;
   
 
 
@@ -30,8 +34,9 @@ export class AuthenticationService {
 
         if(token && refresh_token){
           //store both in localStorage or sessionStorage
-          sessionStorage.setItem(this.tokenKey, token);
-          sessionStorage.setItem(this.refreshTokenKey, refresh_token);
+          this.cookieService.setCookie(this.tokenKey, token, this.cookieTokenDays);
+          this.cookieService.setCookie(this.refreshTokenKey, refresh_token, this.cookieRefreshTokenDays);
+          
           console.log("tokenKey"+ token)
           console.log("refreshTokenKey"+ refresh_token)
  
@@ -45,8 +50,8 @@ export class AuthenticationService {
 
   logout(){
     if (isPlatformBrowser(this.platformId)) {
-    sessionStorage.removeItem(this.tokenKey);
-    sessionStorage.removeItem(this.refreshTokenKey);
+    this.cookieService.deleteCookie(this.tokenKey);
+    this.cookieService.deleteCookie(this.refreshTokenKey);
     this.router.navigate([`/login`]);
     }
 
@@ -55,18 +60,19 @@ export class AuthenticationService {
   isAuthenticated():boolean {
     if (isPlatformBrowser(this.platformId)) {
 
-    const token = sessionStorage.getItem(this.tokenKey);
+    // const token = sessionStorage.getItem(this.tokenKey);
+    const token = this.cookieService.getCookie(this.tokenKey);
     return !!token;  //&& !this.isTokenExpired(token);
     }
     return false;
   }
 
   getToken(): string | null {
-    return sessionStorage.getItem(this.tokenKey);
+    return this.cookieService.getCookie(this.tokenKey);
   }
 
   getRefreshToken(): string | null {
-    return sessionStorage.getItem(this.refreshTokenKey);
+    return this.cookieService.getCookie(this.refreshTokenKey);
   }
 
   private isTokenExpired(token: string){

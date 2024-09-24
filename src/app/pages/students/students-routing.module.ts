@@ -6,13 +6,14 @@ import { StudentListComponent } from './student-list/student-list.component';
 
 
 export const routes: Routes = [
-
+//Student list
 {
-  path: "",
+  path: '',
   component: StudentListComponent  
   },
+  //Student details
   {
-    path: "details/:id",
+    path: ':id',
     component: StudentDetailsComponent  
     }
 
