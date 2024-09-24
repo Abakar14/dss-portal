@@ -1,29 +1,31 @@
-@import "bootstrap/scss/bootstrap"
+@import "bootstrap/scss/bootstrap";
+.bms-container {
+    width: 800px;
+    @include make-container();
 
-.bms-container
-    width: 800px
-    @include make-container()
+}
 
-.bms-row
-    @include make-row()
+.bms-row {
+    @include make-row();
+}
 
-.bms-content-main
-    @include make-col-ready()
+.bms-content-main {
+    @include make-col-ready();
+    @include media-breakpoint-up(sm) ;
+    @include make-col(8);
+    @include media-breakpoint-up(lg); 
+    @include make-col(10);
 
-    @include media-breakpoint-up(sm) 
-        @include make-col(8)
+}
+
   
-    @include media-breakpoint-up(lg) 
-    @include make-col(10)
+.bms-content-secondary {    
+    @include make-col-ready();
+    @include media-breakpoint-up(sm); 
+        @include make-col(4);
   
-
-
-.bms-content-secondary
-    @include make-col-ready()
-    @include media-breakpoint-up(sm) 
-        @include make-col(4)
+    @include media-breakpoint-up(lg);
+    @include make-col(2);
   
-    @include media-breakpoint-up(lg)
-    @include make-col(2)
-  
+}
 

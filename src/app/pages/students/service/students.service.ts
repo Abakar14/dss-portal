@@ -31,7 +31,23 @@ export class StudentsService {
     return this.http.get<Student>(this.apiUrl, {headers});
   }
 
-  deleteStudent(studentId: number){
+  addStudent(student: Student):Observable<Student>{
+   const headers: HttpHeaders = this.getHeaders();
+    return this.http.post<Student>(this.apiUrl, student, { headers })
+
+  }
+
+  updateStudent(studentId: number, student: Student): Observable<Student>{
+    const headers: HttpHeaders = this.getHeaders();
+    const url = `${this.apiUrl}/${studentId}`;
+    return this.http.put<Student>(url, student, { headers })
+
+
+  }
+  deleteStudent(studentId: number):Observable<void>{
+    const headers: HttpHeaders = this.getHeaders();
+    const url = `${this.apiUrl}/${studentId}`;
+    return this.http.delete<void>(url, {headers});
 
   }
 
@@ -39,8 +55,11 @@ export class StudentsService {
 
 
 
-  updateStudent(id?: any, value?: any){
-
+  getHeaders(): HttpHeaders{
+    const headers = new HttpHeaders({
+      'Authorization':`Bearer ${this.authService.getToken()}`
+    });
+    return headers;
   }
 
 

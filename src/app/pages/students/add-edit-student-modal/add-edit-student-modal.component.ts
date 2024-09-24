@@ -1,13 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { StudentsService } from '../service/students.service';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../../../material/material.module';
 
 @Component({
   selector: 'bms-add-edit-student-modal',
   standalone: true,
-  imports: [MatDialogModule,ReactiveFormsModule, MatFormFieldModule],
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
   templateUrl: './add-edit-student-modal.component.html',
   styleUrl: './add-edit-student-modal.component.scss'
 })
@@ -38,15 +39,19 @@ export class AddEditStudentModalComponent implements OnInit{
 
   onSubmit(): void {
     if (this.data.mode === 'add') {
-      // Add a new student
-      // this.studentService.addStudent(this.studentForm.value).subscribe(() => {
-      //   this.dialogRef.close(true); // Close and refresh
-      // });
+    //  Add a new student
+      this.studentService.addStudent(this.studentForm.value).subscribe(() => {
+        this.dialogRef.close(true); // Close and refresh
+      });
     } else {
-      // Edit an existing student
-      // this.studentService.updateStudent(this.data.student.id, this.studentForm.value).subscribe(() => {
-      //   this.dialogRef.close(true); // Close and refresh
-      // });
+    //  Edit an existing student
+      this.studentService.updateStudent(this.data.student.id, this.studentForm.value).subscribe(() => {
+        this.dialogRef.close(true); // Close and refresh
+      });
     }
+  }
+
+  onCancel(): void {
+    this.dialogRef.close(); // Close the modal without making changes
   }
 }

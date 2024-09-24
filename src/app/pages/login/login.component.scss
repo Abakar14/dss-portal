@@ -1,17 +1,40 @@
+.loginForm {
+    max-width: 400px;
+  }
+  
+  .login-image {
+    background-image: url('/assets/images/baraah_2.jpeg');
+    background-size: cover; 
+    
 
-section {
-    background-color: #9A616D; 
-}
-button {
-    background-color: #a88a6bdc;
+  }
 
-}
-.card{
+  $container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
 
-    border-radius: 1rem; 
-} 
+  
+  mat-grid-tile {
+    background: rgb(159, 185, 227);
+  }
+  
+// section {
+//     background-color: #9A616D; 
+// }
+// button {
+//     background-color: #a88a6bdc;
 
-.fas {
+// }
+// .card{
 
-    color: #ff6219;
-} 
+//     border-radius: 1rem; 
+// } 
+
+// .fas {
+
+//     color: #ff6219;
+// } 

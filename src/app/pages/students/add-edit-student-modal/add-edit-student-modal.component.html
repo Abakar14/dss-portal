@@ -1,27 +1,36 @@
 <h2 mat-dialog-title>{{ data.mode === 'add' ? 'Add Student' : 'Edit Student' }}</h2>
 <div mat-dialog-content>
   <form [formGroup]="studentForm">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstName">
+      <input matInput formControlName="firstName" placeholder="Enter first name">
+      <mat-error *ngIf="studentForm.get('firstName')?.hasError('required')">
+        First name is required
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Last Name</mat-label>
-      <input matInput formControlName="lastName">
+      <input matInput formControlName="lastName" placeholder="Enter last name">
+      <mat-error *ngIf="studentForm.get('lastName')?.hasError('required')">
+        Last name is required
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Matriculation Number</mat-label>
-      <input matInput formControlName="matNumber">
+      <input matInput formControlName="matNumber" placeholder="Enter matriculation number">
+      <mat-error *ngIf="studentForm.get('matNumber')?.hasError('required')">
+        Matriculation number is required
+      </mat-error>
     </mat-form-field>
 
     <!-- Add other form fields as necessary -->
   </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button color="primary" (click)="onSubmit()" [disabled]="studentForm.invalid">
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="studentForm.invalid">
     {{ data.mode === 'add' ? 'Add' : 'Update' }}
   </button>
 </div>

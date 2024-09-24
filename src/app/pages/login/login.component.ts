@@ -3,12 +3,13 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { MaterialModule } from '../../material/material.module';
 
 
 @Component({
   selector: 'bms-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MaterialModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -8,13 +8,7 @@ import { MaterialModule } from './material/material.module';
   standalone: true,
   imports: [
     RouterOutlet,  MaterialModule
-    // MatSlideToggleModule, 
-    // MatInputModule,
-    // MatButtonModule,
-    // MatSelectModule,
-    // MatRadioModule,
-    // MatCardModule,
-    // ReactiveFormsModule
+  
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
