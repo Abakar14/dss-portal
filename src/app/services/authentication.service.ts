@@ -14,7 +14,7 @@ export class AuthenticationService {
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
   cookieService = inject(DssCookieService);
-  cookieTokenDays = 2;
+  cookieTokenDays = 1;
   cookieRefreshTokenDays = 2;
   
 
@@ -33,12 +33,11 @@ export class AuthenticationService {
         const refresh_token = response.refresh_token;
 
         if(token && refresh_token){
-          //store both in localStorage or sessionStorage
+    
+          this.cookieService.deleteCookies();
           this.cookieService.setCookie(this.tokenKey, token, this.cookieTokenDays);
           this.cookieService.setCookie(this.refreshTokenKey, refresh_token, this.cookieRefreshTokenDays);
-          
-          console.log("tokenKey"+ token)
-          console.log("refreshTokenKey"+ refresh_token)
+       
  
           return true;
         }
@@ -49,12 +48,20 @@ export class AuthenticationService {
   }
 
   logout(){
+    console.log("AuthenticationService logout");
     if (isPlatformBrowser(this.platformId)) {
-    this.cookieService.deleteCookie(this.tokenKey);
-    this.cookieService.deleteCookie(this.refreshTokenKey);
+     
+    this.cookieService.deleteCookies();
+   
     this.router.navigate([`/login`]);
     }
 
+  }
+
+  removeToken():void{
+    if (isPlatformBrowser(this.platformId)) {
+    this.cookieService.deleteCookie(this.tokenKey);
+    }
   }
 
   isAuthenticated():boolean {
@@ -68,6 +75,7 @@ export class AuthenticationService {
   }
 
   getToken(): string | null {
+   
     return this.cookieService.getCookie(this.tokenKey);
   }
 

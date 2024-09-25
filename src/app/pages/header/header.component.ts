@@ -6,12 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 @Component({
   selector: 'bms-header',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule, 
-    // MatToolbarModule,
-    // MatButtonModule,
-    // MatSidenavModule,
-    // MatListModule,
-    // MatIconModule,
+  imports: [CommonModule, RouterOutlet, RouterModule,
     AsyncPipe,
   ],
   templateUrl: './header.component.html',

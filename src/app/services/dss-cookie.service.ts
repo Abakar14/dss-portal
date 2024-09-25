@@ -11,6 +11,11 @@ export class DssCookieService {
 
   setCookie(name:string, value:string, days: number){
     this.cookieService.set(name, value,{expires: days});
+    // this.cookieService.set('token', 'your-token-here', {
+    //   expires: 1, // Expires in 1 day
+    //   secure: true, // Only sent over HTTPS
+    //   sameSite: 'Strict', // Prevent CSRF
+    // });
   }
 
   getCookie(name:string){
@@ -22,7 +27,23 @@ export class DssCookieService {
   }
 
   deleteCookies(){
-    this.cookieService.deleteAll();
+    // document.cookie.split('; ').forEach(cookie => {
+    //   console.log("before "+cookie);
+    // });
+    
+    this.cookieService.deleteAll('/', 'localhost');
+
+    // document.cookie.split('; ').forEach(cookie => {
+    //   console.log("after "+ cookie);
+    // });
+    
+ 
   }
+
+  getCookies(){
+    return this.cookieService.getAll();
+  }
+
+ 
 
 }

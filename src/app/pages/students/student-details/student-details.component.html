@@ -1,11 +1,40 @@
-<div class="container">
+  <div *ngIf="student" class="student-details-container">
+    <!-- Profile Picture Section -->
+    <div class="profile-picture-section">
+      <img [src]="student.profilePictureUrl || 'assets/images/baraah_3.png'" alt="Profile Picture" class="profile-picture">
+      <input type="file" (change)="onProfilePictureChange($event)" accept="image/*" hidden id="upload-button">
+      <button mat-button color="primary" (click)="document.getElementById('upload-button').click()">Change Picture</button>
+    </div>
+  <!-- Personal Information Section -->
+  <div class="personal-info-section">
+    <h2>{{ student.firstName }} {{ student.lastName }}</h2>
+    <p><strong>Date of Birth:</strong> {{ student.dateOfBirth | date: 'longDate' }}</p>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>Phone:</strong> {{ student.phone }}</p>
+    <p><strong>Address:</strong> {{ student.address }}</p>
+  </div>
+  <!-- Academic Information Section -->
+  <div class="academic-info-section">
+    <h3>Academic Information</h3>
+    <p><strong>Matriculation Number:</strong> {{ student.matNumber }}</p>
+    <p><strong>Teachers:</strong></p>
+    <ul>
+      <li *ngFor="let teacher of student.teachers">{{ teacher.firstName }}</li>
+    </ul>
+
+    <p><strong>Enrolled Courses:</strong></p>
+    <ul>
+      <li *ngFor="let course of student.courses">{{ course }}</li>
+    </ul>
+    <p><strong>GPA:</strong> {{ student.gpa }}</p>
+  </div>
+
+<!-- <div class="container">
     <h2>{{ student?.firstName }} {{ student?.lastName }}</h2>
     <p><strong>Matriculation Number:</strong> {{ student?.matNumber }}</p>
     <p><strong>Email:</strong> {{ student?.email }}</p>
     <p><strong>Phone:</strong> {{ student?.phone }}</p>
-    <!-- <p><strong>Address:</strong> {{ student?.address }}</p> -->
+     <p><strong>Address:</strong> {{ student?.address }}</p> -->
     <button type="button" routerLink="/students" class="btn btn-secondary">Back to List</button>
- 
-      
-  </div>
+ </div> 
   
