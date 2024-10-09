@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Student } from '../model/student';
 import { DSSService } from '../../../services/dss.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,19 @@ export class StudentsService {
   
   private apiUrl = 'http://localhost:9090/dss/api/v1/students'; 
 
-  constructor(private http: HttpClient, private dssService: DSSService) { }
+  constructor(private http: HttpClient, private dssService: DSSService, private authService : AuthenticationService) { }
 
   getStudents():Observable<Student[]>{
-   const headers = this.dssService.getHeaders();
-    // console.log("getStudents() : "+this.authService.getToken());
+   //const headers = this.dssService.getHeaders();
+    //  console.log("getStudents()  headers : "+headers.get("Authorization"));
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`, 
    
-    // const headers = new HttpHeaders({
-    //   'Authorization': `Bearer ${this.authService.getToken()}` // Attach token to headers
-    // });
-      return this.http.get<Student[]>(this.apiUrl, { headers });
+    });
+      
+    return this.http.get<Student[]>(this.apiUrl, { headers });
+      
   }
 
   // getStudents(page: number = 0, size: number = 10): Observable<any> {

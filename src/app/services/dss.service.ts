@@ -11,16 +11,12 @@ export class DSSService {
   constructor(private authService: AuthenticationService, private dssCookie: DssCookieService) { }
 
   getHeaders():HttpHeaders{
-    // console.log("getAll Cookies : " +this.);
+    const token = this.authService.getToken();
+    console.log("getHeaders() token: " +token);
 
-    console.log("getHeaders() token: " +this.authService.getToken());
-
-    const headers = new HttpHeaders(
-      {'Authorization':`Bearer ${this.authService.getToken()}`,
-      'Content-Type':'application/json'
-      }
-    );
-    return headers; 
+    return  new HttpHeaders({
+      'Authorization':`Bearer ${this.authService.getToken()}`     
+      }); 
 
   }
 }

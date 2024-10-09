@@ -7,8 +7,7 @@ import { AuthenticationService } from '../../services/authentication.service';
   selector: 'bms-header',
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterModule,
-    AsyncPipe,
-  ],
+    AsyncPipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
