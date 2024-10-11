@@ -3,14 +3,13 @@
     <mat-toolbar color="primary">
       <!-- <span>Student List</span> -->
       <span class="spacer"></span>
-       <button mat-raised-button color="accent" (click)="openAddStudentModal()">Add Student</button>
-    </mat-toolbar>
+      <button mat-raised-button color="accent" [routerLink]="['/students/registration']">Register Student</button>
+      
+      </mat-toolbar>
     <mat-form-field appearance="fill" class="search-bar">
       <mat-label>Search Students</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Search by firstName or lastName">
     </mat-form-field>
-
- 
   
     <!-- Table displaying students -->
     <mat-table [dataSource]="students" matSort class="mat-elevation-z8">

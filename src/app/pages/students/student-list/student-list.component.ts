@@ -1,18 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddEditStudentModalComponent } from '../add-edit-student-modal/add-edit-student-modal.component';
-import { StudentsService } from '../service/students.service';
+import { StudentsService } from '../../../services/students.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { Student } from '../model/student';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Student } from '../../../model/student';
 import { MaterialModule } from '../../../material/material.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'bms-student-list',
   standalone: true,
-  imports: [MaterialModule],
+  imports: [MaterialModule, RouterModule, RouterOutlet, CommonModule],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.scss'
 })

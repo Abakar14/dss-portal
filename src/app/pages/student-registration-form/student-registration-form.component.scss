@@ -1,0 +1,120 @@
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto; // Center the form
+
+  h3 {
+    margin-top: 20px;
+    color: #1359A0; // Primary color for section titles
+  }
+
+  .form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr; // Two columns layout
+    gap: 20px; // Spacing between fields
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // Single column layout for mobile screens
+    }
+  }
+
+  .gender-group {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+  }
+
+  .full-width {
+    grid-column: span 2; // Make fields span two columns when needed
+  }
+
+ // Styling for form fields (mat-form-field)
+ mat-form-field {
+  width: 100%;
+
+  // Background and text color for input fields
+  .mat-input-element {
+    background-color: #f5f5f5; // Light gray background for inputs
+    color: #333; // Dark gray text color
+  }
+
+  // Label styling
+  .mat-form-field-label {
+    color: #333; // Dark gray for labels
+  }
+
+  // Active and focused field outline color
+  .mat-form-field-underline,
+  .mat-form-field-outline {
+    color: #1976d2; // Primary blue for active state
+  }
+}
+
+    // Styling for checkboxes
+    mat-checkbox .mat-checkbox-label {
+      color: #333; // Dark gray text for checkboxes
+    }
+    // Button styling
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+  
+      button {
+        min-width: 150px;
+        background-color: #1976d2; // Primary blue for buttons
+        color: white; // White text for buttons
+  
+        &:hover {
+          background-color: #1565c0; // Darker blue on hover
+        }
+      }
+    }
+  // .button-container {
+  //   display: flex;
+  //   justify-content: flex-end;
+  //   margin-top: 20px;
+
+  //   button {
+  //     min-width: 150px;
+  //   }
+  // }
+
+  .file-upload-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr; // 1 column for labels, 2 for inputs
+    gap: 10px;
+    margin-bottom: 20px;
+  
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // Stack labels and inputs on small screens
+    }
+  
+    .file-upload-label {
+      align-self: center;
+      font-weight: 500;
+      color: #555;
+    }
+  
+    .file-upload-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+
+   // Error message styling
+   mat-error {
+    color: #d32f2f; // Red for error messages
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+}
+
+  
+  

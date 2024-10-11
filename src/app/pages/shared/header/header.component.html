@@ -1,0 +1,85 @@
+<mat-toolbar color="primary">
+  <!-- Hamburger menu button -- -->
+  <button mat-icon-button (click)="sidenav.toggle()" class="hamburger-menu" aria-label="Open menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="title">School Management</span>
+  <span class="spacer"></span>
+
+   <!-- Main Navigation Links (visible on larger screens) -->
+   <nav class="nav-links">
+    <a mat-button routerLink="/" aria-label="Navigate to Home">Home</a>
+
+    <!-- Dropdown for Students -->
+    <button mat-button [matMenuTriggerFor]="studentsMenu" aria-label="Navigate to Students">Students</button>
+    <mat-menu #studentsMenu="matMenu">
+      <button mat-menu-item routerLink="/students">Students List</button>
+      <button mat-menu-item routerLink="/students/registration">Register Student</button>
+    </mat-menu>
+
+    <!-- Dropdown for Teachers -->
+    <button mat-button [matMenuTriggerFor]="teachersMenu" aria-label="Navigate to Teachers">Teachers</button>
+    <mat-menu #teachersMenu="matMenu">
+      <button mat-menu-item routerLink="/teachers">Teachers List</button>
+      <button mat-menu-item routerLink="/teachers/registration">Register Teacher</button>
+    </mat-menu>
+
+    <!-- Dropdown for Documents -->
+    <button mat-button [matMenuTriggerFor]="documentsMenu" aria-label="Navigate to Documents">Documents</button>
+    <mat-menu #documentsMenu="matMenu">
+      <button mat-menu-item routerLink="/documents/reports">Reports</button>
+      <button mat-menu-item routerLink="/documents/assignments">Assignments</button>
+      <button mat-menu-item routerLink="/documents/exams">Exams</button>
+    </mat-menu>
+
+    <button mat-raised-button color="warn" (click)="onLogout()" aria-label="Logout">Logout</button>
+  </nav>
+</mat-toolbar>
+<!-- Sidenav for Mobile View -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" class="sidenav" fixedInViewport>
+    <nav class="sidenav-links">
+      <a mat-list-item routerLink="/" (click)="sidenav.close()">Home</a>
+
+      <!-- Dropdown for Students in Sidebar -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Students</mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-list-item routerLink="/students" (click)="sidenav.close()">Students List</a>
+        <a mat-list-item routerLink="/students/registration" (click)="sidenav.close()">Register Student</a>
+      </mat-expansion-panel>
+
+      <!-- Dropdown for Teachers in Sidebar -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Teachers</mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-list-item routerLink="/teachers" (click)="sidenav.close()">Teachers List</a>
+        <a mat-list-item routerLink="/teachers/registration" (click)="sidenav.close()">Register Teacher</a>
+      </mat-expansion-panel>
+
+  <!-- Dropdown for Documents in Sidebar -->
+  <a mat-list-item routerLink="/documents" (click)="sidenav.close()">Documents</a>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Documents</mat-panel-title>
+    </mat-expansion-panel-header>
+    <a mat-list-item routerLink="/documents" (click)="sidenav.close()">Documents List</a>
+    <a mat-list-item routerLink="/documents/reports" (click)="sidenav.close()">Reports</a>
+    <a mat-list-item routerLink="/documents/assignments" (click)="sidenav.close()">Assignments</a>
+    <a mat-list-item routerLink="/documents/exams" (click)="sidenav.close()">Exams</a>
+  </mat-expansion-panel>
+
+
+
+      <button mat-raised-button color="warn" (click)="onLogout(); sidenav.close()" aria-label="Logout">Logout</button>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Main content goes here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

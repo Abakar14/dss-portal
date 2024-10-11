@@ -1,1 +1,9 @@
-<p>documents works!</p>
+<mat-card>
+    <mat-card-content>
+      <h3>Upload Document</h3>
+      <input type="file" placeholder="Choose your file" (change)="onFileSelected($event)" />
+      <button mat-raised-button color="primary" (click)="uploadFile()">Upload</button>
+    </mat-card-content>
+  </mat-card>
+
+  

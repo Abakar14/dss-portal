@@ -1,32 +1,26 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './services/guards/auth.guard';
-import { AboutComponent } from './pages/about/about.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   //public Routes
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent }, 
-  
   {
-    path: '',
-    component: LayoutComponent,
-    canActivate:[authGuard],
+    path: '', canActivate:[authGuard],
     children: [
-      { path: 'students', 
-        loadChildren: () => import("../app/pages/students/students.module").then(m => m.StudentsModule)
-      },
-      { path: '', redirectTo: '/students', pathMatch: 'full' }, // Default route
-      // { path: '**', redirectTo: '/students' }, // Wildcard route for 404
-      { path: 'about', component: AboutComponent },
-      { path: '', 
-        redirectTo: 'students', 
-        pathMatch: 'full'
-       },
-    ],
+      {path: '', component: HomeComponent},
+      { path: 'students', loadChildren: () => import("../app/pages/students/students.module").then(m => m.StudentsModule) },
+      { path: 'teachers', loadChildren: () => import("../app/pages/teachers/teachers.module").then(m => m.TeachersModule) },
+      { path: 'documents', loadChildren: () => import("../app/pages/documents/documents.module").then(m => m.DocumentsModule) },
+  
+      { path: 'admin-dashboard', component: AdminDashboardComponent },
+ 
+     ],
   },
 
   { path: '**', component: NotFoundComponent }, //Wildcard route for a 404 page

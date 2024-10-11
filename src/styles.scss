@@ -1,9 +1,41 @@
-// Override Bootstrap variables
-$primary: #0039cb;  // Change primary color
+@use '@angular/material' as mat;
+@import "bootstrap/scss/bootstrap.scss";
+// @import "@angular/material/prebuilt-themes/indigo-pink.css";
+@include mat.core();
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+$myapp-theme-primary: mat.m2-define-palette(mat.$m2-indigo-palette, A200, A100, A400);
+$myapp-theme-accent: mat.m2-define-palette(mat.$m2-indigo-palette);
+$myapp-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-html, body {
-    height: 100% 
 
-} 
+
+// $primary: mat-palette($mat-indigo);
+// $accent: mat-palette($mat-pink, A200, A100, A400);
+// $warn: mat-palette($mat-red);
+
+$myapp-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $myapp-theme-primary,
+    accent: $myapp-theme-accent,
+    warn: $myapp-theme-warn,
+  )
+));
+
+@include mat.all-component-themes($myapp-theme);
+
+$primary-color: #1976d2;
+$secondary-color: #ff4081;
+$background-color: #f4f4f4;
+
+body {
+  background-color: $background-color;
+}
+
+.mat-toolbar {
+  background-color: $primary-color;
+}
+
+.mat-raised-button {
+  font-size: 16px;
+}
+

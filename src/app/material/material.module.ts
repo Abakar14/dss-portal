@@ -12,22 +12,43 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import { MatSort } from '@angular/material/sort';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 const MaterialComponents = [
   MatButtonModule,  
   MatSlideToggleModule,
   MatPaginatorModule,
-  MatIconModule,
   MatTableModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
   MatToolbarModule,
   MatTooltip,
   MatCardModule,
   MatGridListModule,
-  MatInputModule,
   MatSort,
-  MatPaginator  
+  MatPaginator, 
+  MatSidenavModule,
+  MatListModule,
+  MatProgressSpinnerModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatMenuModule,
+  MatExpansionModule
+
+  
 ]
 
 @NgModule({
