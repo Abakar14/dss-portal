@@ -1,3 +1,6 @@
+import { Address } from "./school";
+import { Course, Teacher } from "./teacher";
+
 export interface Student {
     
      id: number;
@@ -21,37 +24,16 @@ export interface Student {
     
 }
 
-export interface Role{
-     name: string;
-     id: number;
-}
-
-export interface UserProfile {
-     firstname: string;
-     lastname: string;
-     username: string;
-     email: string;
-     id: number;
-     roles: Role[];
-     // Add other fields as needed
-   }
-
-export interface Teacher{
-     id: number;
-     firstName: string;
-     lastName: string ;
-     
-}
-export interface Course{
+export interface Guardian{
      id: number;
      name: string;
     
      
 }
 
-export interface Address{
+export interface Consent{
      id: number;
-     street: string;
-     city: string ;
+     name: string;
+    
      
 }

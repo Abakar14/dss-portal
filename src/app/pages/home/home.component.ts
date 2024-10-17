@@ -3,11 +3,11 @@ import { MaterialModule } from '../../material/material.module';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { StudentsService } from '../../services/students.service';
-
 import { TeacherService } from '../../services/teacher.service';
 import { DocumentService } from '../../services/document.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { UserProfile } from '../../model/student';
+import { UserProfile } from '../../model/user';
+
 
 @Component({
   selector: 'bms-home',
@@ -62,9 +62,9 @@ export class HomeComponent implements OnInit {
       total => { this.totalStudents = total; }
     );
 
-    // this.teacherService.countTeachers().subscribe(
-    //   total => { this.totalTeachers = total;}
-    // );
+    this.teacherService.countTeachers().subscribe(
+      total => { this.totalTeachers = total;}
+    );
 
   }
 
@@ -72,8 +72,6 @@ export class HomeComponent implements OnInit {
     hasRole(role: string): boolean {
       return this.userRoles.includes(role);
     }
-
- 
 
 
 }

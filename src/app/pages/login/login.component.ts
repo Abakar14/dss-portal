@@ -38,9 +38,7 @@ export class LoginComponent{
   }
 
   onSubmit() {
-   /*  debugger; */
-   console.log("onSubmit")
-   if(this.loginForm.invalid){
+  if(this.loginForm.invalid){
     console.log("onSubmit invalid")
     return;
    }
@@ -48,13 +46,15 @@ export class LoginComponent{
    const { username, password } = this.loginForm.value;
 
       // Handle form submission
-      console.log('Login form submitted', this.loginForm.value);
+      //console.log('Login form submitted', this.loginForm.value);
       this.authService.login(username, password).subscribe(
           (success) => {
                 if(success){
-                  console.log("onSubmit success");
-                  this.router.navigate(['/']);
-                  // location.href = "";
+                 if(this.router.url !== '/'){
+                  this.router.navigate(['/']); 
+
+                 }
+                  //this.router.navigate(['/']);                 
                 }else{
                   this.errorMessage = "Invalid credentials";
                 }

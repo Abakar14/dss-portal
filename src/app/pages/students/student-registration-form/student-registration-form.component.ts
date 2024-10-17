@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MaterialModule } from '../../material/material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../../../material/material.module';
+import { StudentsService } from '../../../services/students.service';
 
 @Component({
   selector: 'bms-student-registration-form',
@@ -14,7 +15,7 @@ export class StudentRegistrationFormComponent implements OnInit {
 
   registrationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private studentService: StudentsService) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({

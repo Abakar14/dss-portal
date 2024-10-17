@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserProfile } from '../model/student';
+
 import { DSSService } from './dss.service';
+import { UserProfile } from '../model/user';
 
 @Injectable({
   providedIn: 'root'

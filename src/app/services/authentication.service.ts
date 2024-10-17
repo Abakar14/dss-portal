@@ -3,8 +3,8 @@ import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { UserProfile } from '../model/student';
 import { CookieService } from './cookie.service';
+import { UserProfile } from '../model/user';
 
 @Injectable({
   providedIn: 'root'

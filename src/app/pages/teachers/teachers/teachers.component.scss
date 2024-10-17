@@ -1,0 +1,68 @@
+
+.student-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  
+  
+  
+    .mat-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+  
+    }
+  
+  
+      .mat-header-cell {
+        font-weight: bold; 
+        color: #ffffff;
+        background-color: #3f51b5; /* Material primary color */
+  
+      }
+  
+  
+      .mat-cell {
+        font-size: 18px;
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+  
+      } 
+  
+  
+      .mat-header-row {
+  
+        height: 56px;
+      } 
+  
+  
+  
+  
+      .mat-paginator {
+        margin-top: 20px;
+  
+      }
+  
+      .mat-button {
+        margin-right: 10px;
+  
+      }
+  
+      button.mat-warn {
+        color: red;
+      }
+      
+      button.mat-primary {
+        color: #3f51b5;
+      }
+  
+      .mat-mdc-row:hover {
+          cursor: pointer;
+          background-color: rgba(7, 112, 46, 0.09) !important;
+          .mat-mdc-cell {
+            background: transparent;
+          }
+        }
+  
+      } 

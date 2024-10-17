@@ -2,7 +2,7 @@
   <mat-icon class="admin-icon">admin_panel_settings</mat-icon>
   <h3>Admin Dashboard</h3>
   <p>Access administrative tools and settings.</p>
-</mat-card>
+</mat-card> 
 
 
 <div class="home-container">
@@ -54,46 +54,3 @@
     </mat-card>
   </div>
 </div>
-
-
-<!-- <div class="home-container">
-  <mat-card class="welcome-card">
-    <mat-card-title>Welcome, {{ userName }}!</mat-card-title>
-    <mat-card-content>
-      <p>Your roles: <strong>{{ userRoles.join(', ') }}</strong></p>
-      <p>Use the links below to navigate to the different sections of the system.</p>
-    </mat-card-content>
-  </mat-card>
-
-  <div class="dashboard-grid">
-    <mat-card class="dashboard-card" routerLink="/students">
-      <mat-icon>people</mat-icon>
-      <h3>Manage Students</h3>
-      <p>Total: {{totalStudents}}</p> 
-          </mat-card>
-
-    <mat-card *ngIf="userRoles.includes('ROLE_ADMIN') || userRoles.includes('ROLE_TEACHER')"  class="dashboard-card" routerLink="/teachers">
-      <mat-icon>school</mat-icon>
-      <h3>Manage Teachers</h3>
-      <p>Total: {{totalTeachers}}</p> 
-    </mat-card>
-
-    <mat-card class="dashboard-card" routerLink="/documents">
-      <mat-icon>folder</mat-icon>
-      <h3>Manage Documents</h3>
-      <p>Recent Uploads: {{totalDocuments}}</p>  
-      mat-card>
-  </div>
-
-  <mat-card class="activity-card">
-    <mat-card-title>Recent Activity</mat-card-title>
-    <mat-card-content>
-      <ul>
-        <li>New student enrolled: John Doe</li>
-        <li>Document uploaded: Exam Results 2024</li>
-        <li>Teacher updated: Jane Smith</li>
-      </ul>
-    </mat-card-content>
-  </mat-card>
-</div>
-  -->

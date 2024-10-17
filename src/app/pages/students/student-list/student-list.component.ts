@@ -36,7 +36,7 @@ export class StudentListComponent implements OnInit{
   // Load students (with pagination if necessary)
   loadStudents(): void {
     this.studentService.getStudents().subscribe((response: any) => {
-      this.students.data = response.content;
+      this.students.data = response._embedded.studentResponseDtoList;
       this.students.paginator = this.paginator;
       this.students.sort = this.sort;
       this.totalStudents = response.page.totalElements;

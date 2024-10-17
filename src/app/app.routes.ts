@@ -17,7 +17,6 @@ export const routes: Routes = [
       { path: 'students', loadChildren: () => import("../app/pages/students/students.module").then(m => m.StudentsModule) },
       { path: 'teachers', loadChildren: () => import("../app/pages/teachers/teachers.module").then(m => m.TeachersModule) },
       { path: 'documents', loadChildren: () => import("../app/pages/documents/documents.module").then(m => m.DocumentsModule) },
-  
       { path: 'admin-dashboard', component: AdminDashboardComponent },
  
      ],

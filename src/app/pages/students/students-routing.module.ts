@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { StudentListComponent } from './student-list/student-list.component';
-import { StudentRegistrationFormComponent } from '../student-registration-form/student-registration-form.component';
+import { StudentRegistrationFormComponent } from './student-registration-form/student-registration-form.component';
 
 
 export const routes: Routes = [

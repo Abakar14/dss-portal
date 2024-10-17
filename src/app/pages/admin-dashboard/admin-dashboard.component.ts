@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 import { UserService } from '../../services/user.service';
-import { UserProfile } from '../../model/student';
+
 import { CommonModule } from '@angular/common';
 import { LoggingService } from '../../services/logging.service';
 import { error } from 'console';
+import { UserProfile } from '../../model/user';
 
 @Component({
   selector: 'bms-admin-dashboard',
@@ -79,7 +80,7 @@ export class AdminDashboardComponent  implements OnInit{
   // Load users for the user management table
   loadUsers() {
     this.userService.getUsers().subscribe((response: any) => {
-      this.users = response.content;
+      this.users = response._embedded.userDtoList;
     });
   }
 
