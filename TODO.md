@@ -17,6 +17,7 @@
 
 ### In Progress
 - [ ] Teachers Page
+- [ ] In Home by Mouse over button like Manage Student, Teacher or Documents we need to change a background color 
 - [ ] Documents Page Use file upload features from Angular Material and a detailed list view for managing documents.
 - [ ] Students Page
 - [ ] Advanced Routing Lazy for Students

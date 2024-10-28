@@ -1,5 +1,14 @@
+import { Document } from "./document";
 import { Address } from "./school";
 import { Course, Teacher } from "./teacher";
+
+
+export interface StudentDetails {
+     student: Student;
+     address: Address;
+     guardian: Guardian;
+     document: Document
+}
 
 export interface Student {
     
@@ -19,21 +28,20 @@ export interface Student {
      address: Address;
      courses: Course[];
      teachers: Teacher[];
-     gpa:string;
-
-    
+     gpa:string;    
 }
 
 export interface Guardian{
      id: number;
-     name: string;
+     firstName: string;
+     lastName: string;
+     country: string;
+     email: string;
+     mobile: string;
+     phone: string;
     
-     
 }
 
 export interface Consent{
-     id: number;
-     name: string;
-    
-     
+     id: number;     
 }

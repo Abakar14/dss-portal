@@ -1,1 +1,33 @@
-<p>add-edit-teacher-modal works!</p>
+<h2 mat-dialog-title>{{ data.mode === 'add' ? 'Add Teacher' : 'Edit Teacher' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="teacherForm">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Enter first name">
+      <mat-error *ngIf="teacherForm.get('firstName')?.hasError('required')">
+        First name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Enter last name">
+      <mat-error *ngIf="teacherForm.get('lastName')?.hasError('required')">
+        Last name is required
+      </mat-error>
+    </mat-form-field>
+
+  
+   
+
+    <!-- Add other form fields as necessary -->
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="teacherForm.invalid">
+    {{ data.mode === 'add' ? 'Add' : 'Update' }}
+  </button>
+</div>
+
+

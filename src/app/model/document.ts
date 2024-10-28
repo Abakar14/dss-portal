@@ -1,2 +1,5 @@
-export class Document {
+export interface Document {
+    id: number;
+    fileName : string;
+
 }

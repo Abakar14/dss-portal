@@ -21,6 +21,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const MaterialComponents = [
@@ -46,7 +47,8 @@ const MaterialComponents = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatMenuModule,
-  MatExpansionModule
+  MatExpansionModule,
+  ReactiveFormsModule
 
   
 ]

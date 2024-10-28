@@ -1,1 +1,41 @@
-<p>teacher-details works!</p>
+<div *ngIf="teacher" class="teacher-details-container">
+    <!-- Profile Picture Section -->
+    <div class="profile-picture-section">
+      <img [src]="teacher.profilePictureUrl || 'assets/images/baraah_3.png'" alt="Profile Picture" class="profile-picture">
+      <input type="file" (change)="onProfilePictureChange($event)" accept="image/*" hidden id="upload-button">
+      <button mat-button color="primary" (click)="document.getElementById('upload-button').click()">Change Picture</button>
+    </div>
+  <!-- Personal Information Section -->
+  <div class="personal-info-section">
+    <h2>{{ teacher.firstName }} {{ teacher.lastName }}</h2>
+    <p><strong>Date of Birth:</strong> {{ teacher.dateOfBirth | date: 'longDate' }}</p>
+    <p><strong>Email:</strong> {{ teacher.email }}</p>
+    <p><strong>Phone:</strong> {{ teacher.phone }}</p>
+    <p><strong>Address:</strong> {{ teacher.address }}</p>
+  </div>
+  <!-- Academic Information Section -->
+  <div class="academic-info-section">
+    <h3>Academic Information</h3>
+    <p><strong>Matriculation Number:</strong> {{ teacher.matNumber }}</p>
+    <p><strong>Teachers:</strong></p>
+    <ul>
+      <li *ngFor="let teacher of teacher.teachers">{{ teacher.firstName }}</li>
+    </ul>
+
+    <p><strong>Enrolled Courses:</strong></p>
+    <ul>
+      <li *ngFor="let course of teacher.courses">{{ course }}</li>
+    </ul>
+    <p><strong>GPA:</strong> {{ teacher.gpa }}</p>
+  </div>
+
+<!-- <div class="container">
+    <h2>{{ teacher?.firstName }} {{ teacher?.lastName }}</h2>
+    <p><strong>Matriculation Number:</strong> {{ teacher?.matNumber }}</p>
+    <p><strong>Email:</strong> {{ teacher?.email }}</p>
+    <p><strong>Phone:</strong> {{ teacher?.phone }}</p>
+     <p><strong>Address:</strong> {{ teacher?.address }}</p> -->
+    <button type="button" routerLink="/teachers" class="btn btn-secondary">Back to List</button>
+ </div> 
+  
+

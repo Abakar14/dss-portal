@@ -7,6 +7,7 @@ import { TeacherService } from '../../services/teacher.service';
 import { DocumentService } from '../../services/document.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserProfile } from '../../model/user';
+import { BffService } from '../../services/bff.service';
 
 
 @Component({
@@ -26,17 +27,22 @@ export class HomeComponent implements OnInit {
   isLoading: boolean = true;
 
 
+
   constructor(private studentService: StudentsService, 
   private teacherService: TeacherService, 
   private documentService: DocumentService,
+  private bffService: BffService,
   private authService: AuthenticationService 
   ){}
 
   ngOnInit(): void {
 
     this.fetchUserProfile();
-    this.fetchStatistics();        
+    this.fetchStatistics();  
+    
   }
+
+
 
   fetchUserProfile(): void {
 
@@ -67,6 +73,9 @@ export class HomeComponent implements OnInit {
     );
 
   }
+
+
+
 
     // Helper method to check for a specific role
     hasRole(role: string): boolean {

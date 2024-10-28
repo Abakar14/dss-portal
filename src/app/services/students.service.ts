@@ -10,7 +10,8 @@ import { DSSService } from './dss.service';
 export class StudentsService {
   [x: string]: any;
   
-  private apiUrl = 'http://localhost:9090/dss/api/v1/students'; 
+  private apiUrl = 'http://localhost:9090'; 
+
 
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
@@ -18,13 +19,13 @@ export class StudentsService {
    const headers = this.dssService.getHeaders();
      console.log("getStudents()  headers : "+headers.get("Authorization"));
 
-    return this.http.get<Student[]>(this.apiUrl, { headers });
+    return this.http.get<Student[]>(this.apiUrl+"/students", { headers });
       
   }
 
   countStudents():Observable<number>{
     const headers = this.dssService.getHeaders();
-    const url = `${this.apiUrl}/count`;
+    const url = `${this.apiUrl}/students/count`;
     return this.http.get<number>(url, {headers});
   }
 
@@ -37,26 +38,26 @@ export class StudentsService {
   getStudentById(studentId: number):Observable<Student>{
 
     const headers = this.dssService.getHeaders();
-    const url = `${this.apiUrl}/${studentId}`;
+    const url = `${this.apiUrl}/students/${studentId}`;
 
     return this.http.get<Student>(url, {headers});
   }
 
   addStudent(student: Student):Observable<Student>{
     const headers = this.dssService.getHeaders();
-    return this.http.post<Student>(this.apiUrl, student, { headers })
+    return this.http.post<Student>(this.apiUrl+"/students", student, { headers })
   }
 
   updateStudent(studentId: number, student: Student): Observable<Student>{
     const headers = this.dssService.getHeaders();
-    const url = `${this.apiUrl}/${studentId}`;
+    const url = `${this.apiUrl}/student/${studentId}`;
     return this.http.put<Student>(url, student, { headers })
 
 
   }
   deleteStudent(studentId: number):Observable<void>{
     const headers = this.dssService.getHeaders();
-    const url = `${this.apiUrl}/${studentId}`;
+    const url = `${this.apiUrl}/students/${studentId}`;
     return this.http.delete<void>(url, {headers});
 
   }

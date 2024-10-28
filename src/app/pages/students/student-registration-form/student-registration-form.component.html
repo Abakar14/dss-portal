@@ -1,102 +1,134 @@
 <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-  <!-- 1. Student Information -->
-  <h3>Student informationen</h3>
-  <div class="form-group">
-
+  <h3>Student Information</h3>
+  <div formGroupName="student" class="form-group">
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Vorname</mat-label>
+      <mat-label>First Name</mat-label>
       <input matInput placeholder="Enter first name" formControlName="firstName">
-      <!-- Error messages -->
-      <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
-      <mat-error *ngIf="hasError('firstName', 'minlength')">First name must be at least 2 characters long</mat-error>
-      
+      <mat-error *ngIf="hasError('student', 'firstName', 'required')">First name is required</mat-error>
+      <mat-error *ngIf="hasError('student', 'firstName', 'minlength')">First name must be at least 2 characters long</mat-error>
     </mat-form-field>
-    
+
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Lastname</mat-label>
+      <mat-label>Last Name</mat-label>
       <input matInput placeholder="Enter last name" formControlName="lastName">
-      <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
-      <mat-error *ngIf="hasError('lastName', 'minlength')">Last name must be at least 2 characters long</mat-error>
-
+      <mat-error *ngIf="hasError('student', 'lastName', 'required')">Last name is required</mat-error>
+      <mat-error *ngIf="hasError('student', 'lastName', 'minlength')">Last name must be at least 2 characters long</mat-error>
     </mat-form-field>
-
-    <mat-form-field appearance="outline" >
-      <mat-label>Geburtsdatum</mat-label>
+ 
+    <mat-form-field appearance="outline">
+      <mat-label>Birth Date</mat-label>
       <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" formControlName="birthDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="hasError('birthDate', 'required')">Birth date is required</mat-error>
-
+      <mat-error *ngIf="hasError('student', 'birthDate', 'required')">Birth date is required</mat-error>
+      
     </mat-form-field>
-
     <mat-form-field appearance="outline">
-      <mat-label>Birth place</mat-label>
+      <mat-label>Birth Place</mat-label>
       <input matInput placeholder="Enter birth place" formControlName="birthPlace">
-      <mat-error *ngIf="hasError('birthPlace', 'required')">Birth place is required</mat-error>
+      <mat-error *ngIf="hasError('student','birthPlace', 'required')">Birth place is required</mat-error>
 
     </mat-form-field>
-  </div>
-
-  <!-- Gender Selection -->
-  <div class="form-group">
-    <mat-radio-group formControlName="gender" class="gender-group">
-      <mat-label>Gender</mat-label>
-      <mat-radio-button value="male">Männlich</mat-radio-button>
-      <mat-radio-button value="female">Weiblich</mat-radio-button>
-      <mat-radio-button value="diverse">Divers</mat-radio-button>
-    </mat-radio-group>
-    <mat-error *ngIf="hasError('gender', 'required')">Please select gender</mat-error>
-
-  </div>
-  <div class="form-group">
+    
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nationality</mat-label>
       <input matInput placeholder="Nationality" formControlName="nationality">
     </mat-form-field>
-  </div>
 
- <!-- Address Section -->
- <h3>Adresse</h3>
- <div class="form-group">
+    <!-- Gender Selection -->
+    <h3>Gender</h3>
+    <mat-radio-group formControlName="gender" class="gender-group">
+      <mat-radio-button *ngFor="let gender of genders" [value]="gender">
+        {{ gender }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="hasError('student', 'gender', 'required')">Please select a gender</mat-error>
   
-  <mat-form-field appearance="outline">
-    <mat-label>Street</mat-label>
-     <input matInput placeholder="Straße" formControlName="street">
-     <mat-error *ngIf="hasError('street', 'required')">Street is required</mat-error>
+     <!-- Address Section -->
+  <h3>Address</h3>
+  <div formGroupName="address">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Street</mat-label>
+      <input matInput placeholder="Street" formControlName="street">
+      <mat-error *ngIf="hasError('student.address', 'street', 'required')">Street is required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>House No.</mat-label>
+      <mat-label>House Number</mat-label>
     <input matInput placeholder="Hausnummer" formControlName="houseNumber">
-    <mat-error *ngIf="hasError('houseNumber', 'required')">House number is required</mat-error>
- 
-  </mat-form-field> 
+    <mat-error *ngIf="hasError('student.address','houseNumber' ,'required')">House number is required</mat-error>
+   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Zip-code </mat-label>
-    <input matInput placeholder="Postleitzahl" formControlName="postalCode">
-    <mat-error *ngIf="hasError('postalCode', 'required')">Postal code is required</mat-error>
-    <mat-error *ngIf="hasError('postalCode', 'pattern')">Postal code must be a 5-digit number</mat-error>
-
-  </mat-form-field>
-  <mat-form-field appearance="outline">
+   <mat-form-field appearance="outline">
     <mat-label>City</mat-label>
-    <input matInput placeholder="Stadt" formControlName="city">
-    <mat-error *ngIf="hasError('city', 'required')">City is required</mat-error>
-
+  <input matInput placeholder="city" formControlName="city">
+  <mat-error *ngIf="hasError('student.address','city' ,'required')">House number is required</mat-error>
+ </mat-form-field>
+   
+   <mat-form-field appearance="outline">
+    <mat-label>Postal Code </mat-label>
+    <input matInput placeholder="Postal Code" formControlName="postalCode">
+    <mat-error *ngIf="hasError('student.address','postalCode', 'required')">Postal code is required</mat-error>
+    <mat-error *ngIf="hasError('student.address','postalCode', 'pattern')">Postal code must be a 5-digit number</mat-error>
   </mat-form-field>
   </div>
+  
+  </div>
 
+ 
 
-  <!-- Additional sections for Guardian Info, Emergency Contact, Medical Info, etc. -->
+  <!-- Guardian Information -->
+  <h3>Guardian Information</h3>
+  <div class="form-group" formGroupName="guardian">
+    <mat-form-field appearance="outline" >
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="Enter first name" formControlName="firstName">
+      <mat-error *ngIf="hasError('guardian', 'firstName', 'required')">First name is required</mat-error>
+      <mat-error *ngIf="hasError('guardian', 'firstName', 'minlength')">First name must be at least 2 characters long</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Enter last name" formControlName="lastName">
+      <mat-error *ngIf="hasError('guardian', 'lastName', 'required')">Last name is required</mat-error>
+      <mat-error *ngIf="hasError('guardian', 'lastName', 'minlength')">Last name must be at least 2 characters long</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" >
+      <mat-label>Country</mat-label>
+      <input matInput placeholder="Enter Country" formControlName="country">
+      <mat-error *ngIf="hasError('guardian', 'country', 'required')">Country is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" >
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Enter Email" formControlName="email">
+      <mat-error *ngIf="hasError('guardian', 'email', 'required')">Email is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" >
+      <mat-label>Mobile</mat-label>
+      <input matInput placeholder="Enter Mobile" formControlName="mobile">
+      <mat-error *ngIf="hasError('guardian', 'mobile', 'required')">Mobile is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" >
+      <mat-label>Phone</mat-label>
+      <input matInput placeholder="Enter Phone" formControlName="phone">
+      <mat-error *ngIf="hasError('guardian', 'phone', 'required')">Phone is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  
+  <!-- Consent Section -->
+  <h3>Consent</h3>
+  <mat-checkbox formControlName="consentActivities">Agree to extracurricular activities.</mat-checkbox>
+  <mat-error *ngIf="hasError('', 'consentActivities', 'requiredTrue')">You must agree to this consent</mat-error>
+  <mat-checkbox formControlName="consentDataProcessing">Agree to data processing.</mat-checkbox>
+  <mat-error *ngIf="hasError('', 'consentDataProcessing', 'requiredTrue')">You must agree to this consent</mat-error>
 
   <h3>Documents Upload</h3>
-
-<div class="file-upload-group">
-  <!-- Birth Certificate Upload -->
+  <div class="file-upload-group" formGroupName="documents">
+    <!-- Birth Certificate Upload -->
   <label for="birthCertificate" class="file-upload-label">Birth Certificate</label>
   <input id="birthCertificate" type="file" (change)="onFileSelected($event, 'birthCertificate')" class="file-upload-input">
-
   <!-- Medical Certificate Upload -->
   <label for="medicalCertificate" class="file-upload-label">Medical Certificate</label>
   <input id="medicalCertificate" type="file" (change)="onFileSelected($event, 'medicalCertificate')" class="file-upload-input">
@@ -104,23 +136,10 @@
   <!-- School Report Upload -->
   <label for="schoolReport" class="file-upload-label">School Report</label>
   <input id="schoolReport" type="file" (change)="onFileSelected($event, 'schoolReport')" class="file-upload-input">
-</div>
 
-  <!-- Consent Section -->
-  <h3>Einwilligungen</h3>
-  <mat-checkbox formControlName="consentActivities">Ich stimme der Teilnahme meines Kindes an außerschulischen Aktivitäten zu.</mat-checkbox>
-  <mat-error *ngIf="hasError('consentActivities', 'requiredTrue')">You must agree to this consent</mat-error>
+  </div>
 
-  <mat-checkbox formControlName="consentDataProcessing">Ich stimme der Verarbeitung der personenbezogenen Daten zu.</mat-checkbox>
-  <mat-error *ngIf="hasError('consentDataProcessing', 'requiredTrue')">You must agree to this consent</mat-error>
-
-    <!-- Submit Button -->
-    <div class="button-container">
-      <button mat-raised-button color="primary" type="submit">Absenden</button>
-    </div>
+  <div class="button-container">
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
 </form>
-
-
-
-
-
