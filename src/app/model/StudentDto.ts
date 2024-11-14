@@ -1,16 +1,17 @@
-import { Document } from "./document";
-import { Address } from "./school";
+import { AddressDto } from "./school";
 import { Course, Teacher } from "./teacher";
 
 
+
+
+
 export interface StudentDetails {
-     student: Student;
-     address: Address;
-     guardian: Guardian;
-     document: Document
+     studentDto: StudentDto;
+     addressDto: AddressDto;
+     guardianDto: GuardianDto;     
 }
 
-export interface Student {
+export interface StudentDto {
     
      id: number;
      firstName: string;
@@ -25,13 +26,14 @@ export interface Student {
      insertedBy:string;
      profilePictureUrl: string;
      dateOfBirth: Date;
-     address: Address;
+     addressDto: AddressDto;
      courses: Course[];
      teachers: Teacher[];
-     gpa:string;    
+   
 }
 
-export interface Guardian{
+
+export interface GuardianDto{
      id: number;
      firstName: string;
      lastName: string;

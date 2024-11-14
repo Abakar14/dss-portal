@@ -62,13 +62,10 @@ export class AuthenticationService {
 
 
   logout(){
-    console.log("AuthenticationService logout");
-    if (isPlatformBrowser(this.platformId)) {
-     
-    this.cookieService.deleteCookie(this.tokenKey);
-   
-    this.router.navigate([`/login`]);
-    }
+
+  console.log("AuthenticationService logout");
+  this.cookieService.deleteCookie(this.tokenKey);
+  this.router.navigate(['/login']);
 
   }
 

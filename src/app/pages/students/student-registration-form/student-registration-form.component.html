@@ -1,6 +1,6 @@
 <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
   <h3>Student Information</h3>
-  <div formGroupName="student" class="form-group">
+<div formGroupName="student" class="form-group">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>First Name</mat-label>
       <input matInput placeholder="Enter first name" formControlName="firstName">
@@ -35,7 +35,7 @@
       <input matInput placeholder="Nationality" formControlName="nationality">
     </mat-form-field>
 
-    <!-- Gender Selection -->
+
     <h3>Gender</h3>
     <mat-radio-group formControlName="gender" class="gender-group">
       <mat-radio-button *ngFor="let gender of genders" [value]="gender">
@@ -44,7 +44,7 @@
     </mat-radio-group>
     <mat-error *ngIf="hasError('student', 'gender', 'required')">Please select a gender</mat-error>
   
-     <!-- Address Section -->
+
   <h3>Address</h3>
   <div formGroupName="address">
 
@@ -55,15 +55,15 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>House Number</mat-label>
-    <input matInput placeholder="Hausnummer" formControlName="houseNumber">
-    <mat-error *ngIf="hasError('student.address','houseNumber' ,'required')">House number is required</mat-error>
+      <mat-label>Street Number</mat-label>
+    <input matInput placeholder="streetNumber" formControlName="streetNumber">
+    <mat-error *ngIf="hasError('student.address','streetNumber' ,'required')">Street number is required</mat-error>
    </mat-form-field>
 
    <mat-form-field appearance="outline">
     <mat-label>City</mat-label>
   <input matInput placeholder="city" formControlName="city">
-  <mat-error *ngIf="hasError('student.address','city' ,'required')">House number is required</mat-error>
+  <mat-error *ngIf="hasError('student.address','city' ,'required')">City is required</mat-error>
  </mat-form-field>
    
    <mat-form-field appearance="outline">
@@ -78,7 +78,7 @@
 
  
 
-  <!-- Guardian Information -->
+
   <h3>Guardian Information</h3>
   <div class="form-group" formGroupName="guardian">
     <mat-form-field appearance="outline" >
@@ -114,10 +114,28 @@
       <input matInput placeholder="Enter Phone" formControlName="phone">
       <mat-error *ngIf="hasError('guardian', 'phone', 'required')">Phone is required</mat-error>
     </mat-form-field>
+
+    <h3>Guardian Gender</h3>
+    <mat-radio-group formControlName="gender" class="gender-group">
+      <mat-radio-button *ngFor="let gender of genders" [value]="gender">
+        {{ gender }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="hasError('guardian', 'gender', 'required')">Please select a gender</mat-error>
+  
+    <h3>Guardian Relationship</h3>
+    <mat-radio-group formControlName="relationship" class="relationship-group">
+      <mat-radio-button *ngFor="let relationship of relationships" [value]="relationship">
+        {{ relationship }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="hasError('guardian', 'relation', 'required')">Please select a relation</mat-error>
+  
+
   </div>
 
   
-  <!-- Consent Section -->
+
   <h3>Consent</h3>
   <mat-checkbox formControlName="consentActivities">Agree to extracurricular activities.</mat-checkbox>
   <mat-error *ngIf="hasError('', 'consentActivities', 'requiredTrue')">You must agree to this consent</mat-error>
@@ -125,19 +143,25 @@
   <mat-error *ngIf="hasError('', 'consentDataProcessing', 'requiredTrue')">You must agree to this consent</mat-error>
 
   <h3>Documents Upload</h3>
-  <div class="file-upload-group" formGroupName="documents">
-    <!-- Birth Certificate Upload -->
-  <label for="birthCertificate" class="file-upload-label">Birth Certificate</label>
-  <input id="birthCertificate" type="file" (change)="onFileSelected($event, 'birthCertificate')" class="file-upload-input">
-  <!-- Medical Certificate Upload -->
-  <label for="medicalCertificate" class="file-upload-label">Medical Certificate</label>
-  <input id="medicalCertificate" type="file" (change)="onFileSelected($event, 'medicalCertificate')" class="file-upload-input">
+  <div formArrayName="documents">
+    <div *ngFor="let document of documents.controls; let i = index" [formGroupName]="i" class="document-upload">
+      <mat-form-field appearance="outline">
+        <mat-label>Document Type</mat-label>
+        <mat-select formControlName="documentType">
+          <mat-option *ngFor="let type of documentTypes" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <!-- School Report Upload -->
-  <label for="schoolReport" class="file-upload-label">School Report</label>
-  <input id="schoolReport" type="file" (change)="onFileSelected($event, 'schoolReport')" class="file-upload-input">
+      <input type="file" (change)="onFileSelected($event, i)" formControlName="file" />
 
+      <button mat-button color="warn" (click)="removeDocument(i)">Remove Document</button>
+    </div>
   </div>
+
+  <button mat-button color="primary" (click)="addDocument()">Add Document</button>
+
 
   <div class="button-container">
     <button mat-raised-button color="primary" type="submit">Submit</button>

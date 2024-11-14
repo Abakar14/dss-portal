@@ -3,13 +3,19 @@ export interface School {
 
 export interface Classe {
 }
+export interface AddressCreateDto {
+    street: string;
+    streetNumber: number
+    city: string ;
+    postalCode: string;
 
-export interface Address {
+}
+export interface AddressDto {
     id: number;
     street: string;
-    houseNumber: number
+    streetNumber: number
     city: string ;
-    postCode: string;
+    postalCode: string;
 
 }
 

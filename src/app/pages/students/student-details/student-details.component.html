@@ -11,7 +11,7 @@
     <p><strong>Date of Birth:</strong> {{ student.dateOfBirth | date: 'longDate' }}</p>
     <p><strong>Email:</strong> {{ student.email }}</p>
     <p><strong>Phone:</strong> {{ student.phone }}</p>
-    <p><strong>Address:</strong> {{ student.address }}</p>
+    <p><strong>Address:</strong> {{ student.addressDto }}</p>
   </div>
   <!-- Academic Information Section -->
   <div class="academic-info-section">
@@ -26,7 +26,7 @@
     <ul>
       <li *ngFor="let course of student.courses">{{ course }}</li>
     </ul>
-    <p><strong>GPA:</strong> {{ student.gpa }}</p>
+   
   </div>
 
 <!-- <div class="container">

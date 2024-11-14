@@ -4,11 +4,11 @@ import { StudentsService } from '../../../services/students.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { Student } from '../../../model/student';
 import { MaterialModule } from '../../../material/material.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CommonModule } from '@angular/common';
+import { StudentDto } from '../../../model/StudentDto';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 export class StudentListComponent implements OnInit{
 
   displayedColumns: string[] = ['firstName', 'lastName', 'matNumber', 'actions']; // Columns to display in the table
-  students = new MatTableDataSource<Student>([]);; // Data source for the table
+  students = new MatTableDataSource<StudentDto>([]);; // Data source for the table
   totalStudents = 0; // Total number of students for pagination
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

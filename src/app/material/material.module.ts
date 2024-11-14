@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const MaterialComponents = [
@@ -48,7 +49,8 @@ const MaterialComponents = [
   MatNativeDateModule,
   MatMenuModule,
   MatExpansionModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatSelectModule
 
   
 ]

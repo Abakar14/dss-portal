@@ -17,4 +17,14 @@ export class DSSService {
       }); 
 
   }
+
+
+  getHeadersWithFormData():HttpHeaders{
+ 
+    return  new HttpHeaders({
+      'Authorization':`Bearer ${this.authService.getToken()}`,
+      'accept': 'application/json'   
+      }); 
+
+  }
 }

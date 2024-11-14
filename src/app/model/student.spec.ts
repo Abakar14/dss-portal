@@ -1,4 +1,4 @@
-import { Student } from './student';
+import { Student } from './StudentDto';
 
 describe('Student', () => {
   it('should create an instance', () => {

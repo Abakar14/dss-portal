@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Student } from '../model/student';
 import { DSSService } from './dss.service';
+import { StudentDto } from '../model/StudentDto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,11 @@ export class StudentsService {
 
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
-  getStudents():Observable<Student[]>{
+  getStudents():Observable<StudentDto[]>{
    const headers = this.dssService.getHeaders();
      console.log("getStudents()  headers : "+headers.get("Authorization"));
 
-    return this.http.get<Student[]>(this.apiUrl+"/students", { headers });
+    return this.http.get<StudentDto[]>(this.apiUrl+"/students", { headers });
       
   }
 
@@ -35,23 +35,23 @@ export class StudentsService {
   // }
   
 
-  getStudentById(studentId: number):Observable<Student>{
+  getStudentById(studentId: number):Observable<StudentDto>{
 
     const headers = this.dssService.getHeaders();
     const url = `${this.apiUrl}/students/${studentId}`;
 
-    return this.http.get<Student>(url, {headers});
+    return this.http.get<StudentDto>(url, {headers});
   }
 
-  addStudent(student: Student):Observable<Student>{
+  addStudent(student: StudentDto):Observable<StudentDto>{
     const headers = this.dssService.getHeaders();
-    return this.http.post<Student>(this.apiUrl+"/students", student, { headers })
+    return this.http.post<StudentDto>(this.apiUrl+"/students", student, { headers })
   }
 
-  updateStudent(studentId: number, student: Student): Observable<Student>{
+  updateStudent(studentId: number, student: StudentDto): Observable<StudentDto>{
     const headers = this.dssService.getHeaders();
     const url = `${this.apiUrl}/student/${studentId}`;
-    return this.http.put<Student>(url, student, { headers })
+    return this.http.put<StudentDto>(url, student, { headers })
 
 
   }

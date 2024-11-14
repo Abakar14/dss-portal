@@ -1,4 +1,4 @@
-import { Address } from "./school";
+import { AddressDto } from "./school";
 
 export interface Teacher {
     id: number;
@@ -14,7 +14,7 @@ export interface Teacher {
      insertedBy:string;
      profilePictureUrl: string;
      dateOfBirth: Date;
-     address: Address;
+     address: AddressDto;
      courses: Course[];
      teachers: Teacher[];
      gpa:string;

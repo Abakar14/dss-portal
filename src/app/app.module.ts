@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -15,7 +17,7 @@ import { BrowserModule } from '@angular/platform-browser';
    
   ], 
   providers:[
-  
+    provideHttpClient(withInterceptors([authInterceptor])),
   ], 
   bootstrap:[/* Your Main Component */]
 })

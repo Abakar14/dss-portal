@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../../../model/student';
+import {  StudentDto } from '../../../model/StudentDto';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { StudentsService } from '../../../services/students.service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  student: Student | null = null;
+  student: StudentDto | null = null;
   document: any;
 
   constructor(private route: ActivatedRoute, private studentService: StudentsService){}
@@ -30,7 +30,7 @@ export class StudentDetailsComponent implements OnInit {
   loadStudentDetails(studentId: number) {
     console.log("loadStudentDetails studentId " +studentId);
     this.studentService.getStudentById(studentId).subscribe(
-      (student: Student) => {
+      (student: StudentDto) => {
         this.student = student;
       }
     ),

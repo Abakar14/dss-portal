@@ -1,5 +1,7 @@
-export interface Document {
+export interface DocumentDto {
     id: number;
     fileName : string;
 
 }
+
+
