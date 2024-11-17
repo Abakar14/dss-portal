@@ -26,6 +26,20 @@ export class StudentsService {
   
     return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
   }
+
+
+  searchStudents(filterValue: string, page: number = 0, size: number = 10): Observable<any> {
+    
+    const headers = this.dssService.getHeaders();
+
+    const params = new HttpParams()
+    .set('search', filterValue)
+    .set('page', page)
+    .set('size', size);
+    
+    return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
+
+  }
   
   countStudents():Observable<number>{
     const headers = this.dssService.getHeaders();

@@ -14,7 +14,7 @@ import { StudentDto } from '../../../model/StudentDto';
 @Component({
   selector: 'bms-student-list',
   standalone: true,
-  imports: [MaterialModule, RouterModule, RouterOutlet, CommonModule],
+  imports: [MaterialModule, RouterModule,  CommonModule],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.scss'
 })
@@ -100,13 +100,41 @@ export class StudentListComponent implements OnInit{
     this.router.navigate(['/students', studentId ]);
   }
 
-  applyFilter(event: Event): void{
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.students.filter = filterValue.trim().toLowerCase();
-    if(this.students.paginator){
-      this.students.paginator.firstPage();
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  
+    if (filterValue) {
+      this.studentService.searchStudents(filterValue, this.paginator.pageIndex, this.paginator.pageSize).subscribe({
+        next: (response) => {
+          this.students.data = response._embedded?.studentResponseDtoList || [];
+          this.totalStudents = response.page?.totalElements || 0;
+        },
+        error: (err) => {
+          console.error('Failed to search students', err);
+        },
+      });
+    } else {
+      this.loadStudents(); // Reload original list if search input is cleared
     }
-
   }
+  
+
+  // applyFilter(event: Event): void {
+
+  //   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  
+  //   if (filterValue) {
+  //     this.studentService.searchStudents(filterValue).subscribe((response: any) => {
+  //       this.students.data = response._embedded.studentResponseDtoList; // Update table data
+  //       this.totalStudents = response.page.totalElements; // Update total students for pagination
+  //     }, error => {
+  //       console.error('Failed to search students', error);
+  //     });
+  //   } else {
+  //     // If no filter value, reload the original student list
+  //     this.loadStudents();
+  //   }
+  // }
+  
 
 }
