@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CommonModule } from '@angular/common';
 import { StudentDto } from '../../../model/StudentDto';
@@ -34,17 +34,23 @@ export class StudentListComponent implements OnInit{
   }
 
   // Load students (with pagination if necessary)
-  loadStudents(): void {
-    this.studentService.getStudents().subscribe((response: any) => {
-      this.students.data = response._embedded.studentResponseDtoList;
-      this.students.paginator = this.paginator;
-      this.students.sort = this.sort;
-      this.totalStudents = response.page.totalElements;
-    }),
-    (error: any) => {
+  loadStudents(pageIndex: number = 0, pageSize: number = 10): void {
+
+    this.studentService.getStudents(pageIndex, pageSize).subscribe((response: any) => {
+
+      if (response._embedded?.studentResponseDtoList) {
+        this.students.data = response._embedded.studentResponseDtoList;
+        this.totalStudents = response.page.totalElements; // Total elements in backend
+        this.paginator.pageIndex = pageIndex; // Current page
+        this.paginator.length = this.totalStudents; // Total items
+      } else {
+        console.error("No students returned from the server.");
+      }
+    }, error => {
       console.error('Failed to load students', error);
-    }
+    });
   }
+  
 
   // Open Add Student modal
   openAddStudentModal(): void {
@@ -82,10 +88,13 @@ export class StudentListComponent implements OnInit{
   }
 
   // Pagination change
-  onPageChange(event: any): void {
-    // Handle pagination changes (fetch the new page of students)
+  onPageChange(event: PageEvent): void {
+    const pageIndex = event.pageIndex;
+    const pageSize = event.pageSize;
+    console.log("onPageChange(): ", `pageIndex: ${pageIndex} pageSize: ${pageSize}`);
+    this.loadStudents(pageIndex, pageSize);
   }
-
+  
 
   viewStudentDetails(studentId: number):void{
     this.router.navigate(['/students', studentId ]);

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DSSService } from './dss.service';
@@ -15,25 +15,24 @@ export class StudentsService {
 
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
-  getStudents():Observable<StudentDto[]>{
-   const headers = this.dssService.getHeaders();
-     console.log("getStudents()  headers : "+headers.get("Authorization"));
+  getStudents(pageIndex: number, pageSize: number): Observable<any> {
 
-    return this.http.get<StudentDto[]>(this.apiUrl+"/students", { headers });
-      
+    const headers = this.dssService.getHeaders();
+  //console.log("getStudents()  headers : "+headers.get("Authorization"));
+
+    const params = new HttpParams()
+      .set('page', pageIndex.toString())
+      .set('size', pageSize.toString());
+  
+    return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
   }
-
+  
   countStudents():Observable<number>{
     const headers = this.dssService.getHeaders();
     const url = `${this.apiUrl}/students/count`;
     return this.http.get<number>(url, {headers});
   }
 
-  // getStudents(page: number = 0, size: number = 10): Observable<any> {
-  //   const params = new HttpParams().set('page', page).set('size', size);
-  //   return this.http.get<any>(`${this.apiUrl}/students`, { params });
-  // }
-  
 
   getStudentById(studentId: number):Observable<StudentDto>{
 

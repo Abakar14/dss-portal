@@ -23,7 +23,8 @@ export class DSSService {
  
     return  new HttpHeaders({
       'Authorization':`Bearer ${this.authService.getToken()}`,
-      'accept': 'application/json'   
+      'accept': 'application/json'
+         
       }); 
 
   }

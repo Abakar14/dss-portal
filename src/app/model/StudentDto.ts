@@ -2,9 +2,6 @@ import { AddressDto } from "./school";
 import { Course, Teacher } from "./teacher";
 
 
-
-
-
 export interface StudentDetails {
      studentDto: StudentDto;
      addressDto: AddressDto;

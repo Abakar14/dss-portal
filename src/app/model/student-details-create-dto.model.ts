@@ -9,7 +9,7 @@ export interface StudentDetailsCreateDto {
 
     studentCreateDto: StudentCreateDto;
     addressCreateDto: AddressCreateDto;
-    guardianCreateDto: GuardianCreateDto; 
+   // guardianCreateDto: GuardianCreateDto; 
 
 }
 
@@ -24,10 +24,9 @@ export interface StudentCreateDto {
     dateOfBirth: string;
     gender:Gender;
     addressCreateDto: AddressCreateDto;
+    guardianCreateDtos: GuardianCreateDto[];
     courses: Course[];
-    teachers: Teacher[];
-   
-   
+    teachers: Teacher[];   
 }
 
 export interface GuardianCreateDto{

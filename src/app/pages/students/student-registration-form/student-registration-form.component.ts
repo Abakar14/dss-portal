@@ -41,7 +41,7 @@ export class StudentRegistrationFormComponent implements OnInit{
         birthDate: ['', Validators.required],
         birthPlace: ['', Validators.required],
         gender: [Gender.UNKNOWN, Validators.required], // Set default gender to 'Unknown'
-        nationality: ['', Validators.required],
+        nationality: ['', Validators.required],      
         address: this.fb.group({
           street: ['', Validators.required],     
           streetNumber: ['', Validators.required],
@@ -49,24 +49,51 @@ export class StudentRegistrationFormComponent implements OnInit{
           city: ['', Validators.required],
         }),
       }),
-      guardian: this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        gender: [Gender.UNKNOWN, Validators.required], // Set default gender to 'Unknown'
-        relationship: [RelationShip.Other, Validators.required], // Set default gender to 'Unknown'
-        country: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        mobile: ['', Validators.required],
-        phone: ['', Validators.required],
-      }),
- 
+      // guardian: this.fb.group({
+      //   firstName: ['', Validators.required],
+      //   lastName: ['', Validators.required],
+      //   gender: [Gender.UNKNOWN, Validators.required], // Set default gender to 'Unknown'
+      //   relationship: [RelationShip.Other, Validators.required], // Set default gender to 'Unknown'
+      //   country: ['', Validators.required],
+      //   email: ['', [Validators.required, Validators.email]],
+      //   mobile: ['', Validators.required],
+      //   phone: ['', Validators.required],
+      // }),
+      guardians: this.fb.array([]), // FormArray for guardians
       documents: this.fb.array([]), // FormArray for document uploads
       consentActivities: [false, Validators.requiredTrue],
       consentDataProcessing: [false, Validators.requiredTrue]
     });
+    // Add a default guardian entry
+    this.addGuardian();
     this.cdr.detectChanges();
 
   }
+
+  // Get guardians FormArray
+get guardians() {
+  return this.registrationForm.get('guardians') as FormArray;
+}
+
+// Add a new guardian
+addGuardian() {
+  const guardianGroup = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    gender: [Gender.UNKNOWN, Validators.required],
+    relationship: [RelationShip.Other, Validators.required],
+    country: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    mobile: ['', Validators.required],
+    phone: ['', Validators.required],
+  });
+  this.guardians.push(guardianGroup);
+}
+
+// Remove a guardian
+removeGuardian(index: number) {
+  this.guardians.removeAt(index);
+}
 
 
     // Get documents FormArray
@@ -86,57 +113,58 @@ removeDocument(index: number) {
  this.documents.removeAt(index);
 }
 
-
 onSubmit() {
   if (this.registrationForm.valid) {
-
     console.log("Submitting form with data:", this.registrationForm.value);
 
     const formValue = this.registrationForm.value;
-    // Format birthDate
     const formattedBirthDate = this.datePipe.transform(formValue.student.birthDate, 'yyyy-MM-dd');
 
-    const genderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === formValue.student.gender);
+    const studentGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === formValue.student.gender);
 
+    // Format guardians
+    const guardianCreateDtos = formValue.guardians.map((guardian: any) => {
 
-    const guardianGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === formValue.guardian.gender);
+      const guardianGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === guardian.gender);
+      return {
+        ...guardian,
+        gender: guardianGenderKey,
+      };
+    });
 
-    // Prepare studentDetails from the form data
+    // Prepare studentDetailsCreateDto
     const studentDetailsCreateDto: StudentDetailsCreateDto = {
-      studentCreateDto: { 
-                          ...formValue.student,
-                          birthDate: formattedBirthDate,
-                          gender: genderKey
-                          },
-      guardianCreateDto: {
-        ...formValue.guardian,
-          gender: guardianGenderKey
+      studentCreateDto: {
+        ...formValue.student,
+        birthDate: formattedBirthDate,
+        gender: studentGenderKey,
+        guardianCreateDtos, // Include all guardians here
       },
       addressCreateDto: formValue.student.address,
     };
 
-    // Prepare files and document types
-    const files: { [key: string]: File } = {};
-    const documentTypes: string[] = []; // Array to hold document types
+    // Prepare FormData for file uploads
+    const formData = new FormData();
+    formData.append('studentDetailsCreateDto', new Blob([JSON.stringify(studentDetailsCreateDto)], { type: 'application/json' }));
 
     this.documents.controls.forEach((doc) => {
       const documentType = doc.get('documentType')?.value;
       const file = doc.get('file')?.value;
       if (documentType && file) {
-        files[documentType] = file; // Use document type as the key
-        documentTypes.push(documentType); // Add each document type to the array
+        formData.append('files', file);
+        formData.append('documentTypes', documentType);
       }
     });
 
-    // Call the BFF service with both parameters
-    this.bffService.addStudentDetails(studentDetailsCreateDto, files, documentTypes).subscribe({
+    // Call BFF service
+    this.bffService.addStudentDetails(formData).subscribe({
       next: (response) => {
         console.log("Student details added successfully:", response);
         this.router.navigate(['/students']);
       },
       error: (err) => {
         console.error("Error adding student details:", err);
-      }
+      },
     });
   } else {
     console.log("Form is invalid.");
@@ -145,12 +173,91 @@ onSubmit() {
 }
 
 
-onFileSelected(event: any, index: number): void {
-  const file = event.target.files[0];
+// onSubmit() {
+
+//   if (this.registrationForm.valid) {
+
+//     console.log("Submitting form with data:", this.registrationForm.value);
+
+//     const formValue = this.registrationForm.value;
+//     // Format birthDate
+//     const formattedBirthDate = this.datePipe.transform(formValue.student.birthDate, 'yyyy-MM-dd');
+
+//     const studentGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === formValue.student.gender);
+
+//     //const guardianGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === formValue.guardian.gender);
+
+//  // Format guardians
+//  const guardianCreateDtos = formValue.guardians.map((guardian: any) => {
+
+//   const guardianGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === 
+//   guardian.gender);
+//   return {
+//     ...guardian,
+//     gender: guardianGenderKey,
+//   };
+// });
+
+//     // Prepare studentDetails from the form data
+//     const studentDetailsCreateDto: StudentDetailsCreateDto = {
+//       studentCreateDto: { 
+//                           ...formValue.student,
+//                           birthDate: formattedBirthDate,
+//                           gender: studentGenderKey,
+//                           guardianCreateDtos, // Include all guardians here
+//                           },
+//          addressCreateDto: formValue.student.address,
+//     };
+
+  
+//        // Prepare FormData
+//        const formData = new FormData();
+//        formData.append('studentDetails', new Blob([JSON.stringify(studentDetailsCreateDto)], { type: 'application/json' }));
+   
+//        this.documents.controls.forEach((doc) => {
+//          const documentType = doc.get('documentType')?.value;
+//          const file = doc.get('file')?.value;
+//          if (documentType && file) {
+//            formData.append('files', file);             // Append each file to 'files' array
+//            formData.append('documentTypes', documentType); // Append each documentType to 'documentTypes' array
+//          }
+//        });
+
+//     // Call the BFF service with the formData
+//     this.bffService.addStudentDetails(formData).subscribe({
+//       next: (response) => {
+//         console.log("Student details added successfully:", response);
+//         this.router.navigate(['/students']);
+//       },
+//       error: (err) => {
+//         console.error("Error adding student details:", err);
+//       }
+//     });
+//   } else {
+//     console.log("Form is invalid.");
+//     this.registrationForm.markAllAsTouched();
+//   }
+
+
+// }
+
+
+onFileSelected(event: Event, index: number): void {
+  const input = event.target as HTMLInputElement;
+  const file = input.files ? input.files[0] : null;
+  
   if (file) {
-    this.documents.controls[index].get('file')?.setValue(file);
+    this.documents.controls[index].get('file')?.setValue(file); // Only set the form control value, not the input value
   }
 }
+
+
+// onFileSelected(event: any, index: number): void {
+//   const file = event.target.files[0];
+//   if (file) {
+//     this.documents.controls[index].get('file')?.setValue(file);
+//   }
+// }
 
 
 
