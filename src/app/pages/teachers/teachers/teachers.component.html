@@ -1,62 +1,85 @@
 <div class="student-list-container">
-    <h2>Teacher List</h2>
-      <mat-toolbar color="primary">
-        <!-- <span>Student List</span> -->
-        <span class="spacer"></span>
-        <button mat-raised-button color="accent" [routerLink]="['/teacher/registration']">Register Teacher</button>
-        
-        </mat-toolbar>
-      <mat-form-field appearance="fill" class="search-bar">
-        <mat-label>Search Teacher</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search by firstName or lastName">
-      </mat-form-field>
-    
-      <!-- Table displaying students -->
-      <mat-table [dataSource]="teachers" matSort class="mat-elevation-z8">
-  
-       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header > ID </mat-header-cell>
+  <h2>Teacher Management</h2>
+  <mat-toolbar color="primary" class="toolbar">
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" [routerLink]="['/teachers/registration']">
+     <mat-icon>person_add</mat-icon> Register Teacher
+    </button>
+  </mat-toolbar>
+
+  <div class="search-toolbar">
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Search Teacher</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by first name or last name">
+    </mat-form-field>
+  </div>
+
+  <div class="table-container">
+    <mat-table [dataSource]="teachers" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="sortable-header">
+          ID
+        </mat-header-cell>
         <mat-cell *matCellDef="let teacher"> {{ teacher.id }} </mat-cell>
       </ng-container>
-  
-        <ng-container matColumnDef="firstName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> First Name</mat-header-cell>
-          <mat-cell *matCellDef="let teacher"> {{ teacher.firstName }} </mat-cell>
-        </ng-container>
-  
-        <ng-container matColumnDef="lastName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-          <mat-cell *matCellDef="let teacher"> {{ teacher.lastName }} </mat-cell>
-        </ng-container>
-    
-        <!-- Column for Matriculation Number -->
-        <ng-container matColumnDef="matNumber">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Matriculation No. </mat-header-cell>
-          <mat-cell *matCellDef="let teacher"> {{ teacher.matNumber }} </mat-cell>
-        </ng-container>
-    
-        <!-- Column for Actions -->
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-          <mat-cell *matCellDef="let teacher">
-            <button mat-icon-button color="primary" (click)="openEditTeacherModal(teacher)"  matTooltip="Edit Student!!">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button  color="warn" (click)="confirmDeleteTeacher(teacher.id)" matTooltip="Delete Student!!">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button  (click)="viewTeacherDetails(teacher.id)" matTooltip="View Student">
-              <mat-icon>pageview</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
-    
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    
-      </mat-table>
-    
-      <!-- Pagination (optional) -->
-     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
-    
+
+      <!-- First Name Column -->
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef class="sortable-header" (click)="onHeaderDoubleClick('firstName')">
+          First Name
+          <mat-icon *ngIf="currentSort.column === 'firstName'" [ngClass]="{'asc': currentSort.direction === 'asc', 'desc': currentSort.direction === 'desc'}">
+            {{ currentSort.direction === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+          </mat-icon>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let teacher"> {{ teacher.firstName }} </mat-cell>
+      </ng-container>
+
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef class="sortable-header" (click)="onHeaderDoubleClick('lastName')">
+          Last Name
+          <mat-icon *ngIf="currentSort.column === 'lastName'" [ngClass]="{'asc': currentSort.direction === 'asc', 'desc': currentSort.direction === 'desc'}">
+            {{ currentSort.direction === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+          </mat-icon>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let teacher"> {{ teacher.lastName }} </mat-cell>
+      </ng-container>
+
+      <!-- Matriculation Number Column -->
+      <ng-container matColumnDef="matNumber">
+        <mat-header-cell *matHeaderCellDef> Matriculation No. </mat-header-cell>
+        <mat-cell *matCellDef="let teacher"> {{ teacher.matNumber }} </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let teacher">
+          <button mat-icon-button color="primary" (click)="openEditTeacherModal(teacher)" matTooltip="Edit Teacher">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="confirmDeleteTeacher(teacher.id)" matTooltip="Delete Teacher">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="viewTeacherDetails(teacher.id)" matTooltip="View Details">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <mat-paginator
+    [length]="totalTeachers"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DSSService } from './dss.service';
 import { Observable } from 'rxjs/internal/Observable';
@@ -14,11 +14,26 @@ export class TeacherService {
 
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
-  getTeachers():Observable<Teacher[]>{
+  getTeachers( pageIndex: number,
+    pageSize: number,
+    sort: string = 'firstName',
+    order: string = 'asc',
+    search: string = ''):Observable<any>{
+
     const headers = this.dssService.getHeaders();
       console.log("getTeachers()  headers : "+headers.get("Authorization"));
  
-     return this.http.get<Teacher[]>(this.apiUrl+"/teachers", { headers });
+      let params = new HttpParams()
+      .set('page', pageIndex.toString())
+      .set('size', pageSize.toString())
+      .set('sort', `${sort},${order}`);
+       // Add search query if provided
+    if (search) {
+      params = params.set('search', search);
+    }
+   
+  // return this.http.get<any>(this.apiUrl+"/teachers", { headers,  params });
+   return this.http.get<any>(`${this.apiUrl}/teachers`, { headers, params });
        
    }
 
@@ -28,6 +43,19 @@ export class TeacherService {
     return this.http.get<number>(url, {headers});
   }
 
+
+  searchTeachers(filterValue: string, page: number = 0, size: number = 10): Observable<any> {
+    
+    const headers = this.dssService.getHeaders();
+
+    const params = new HttpParams()
+    .set('search', filterValue)
+    .set('page', page)
+    .set('size', size);
+    
+    return this.http.get<any>(`${this.apiUrl}/teachers`, { headers, params });
+
+  }
 
   getTeacherById(teacherId: number):Observable<Teacher>{
 

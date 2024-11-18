@@ -140,62 +140,6 @@
 
 <button mat-raised-button color="primary" (click)="addGuardian()">Add Guardian</button>
 
-  <!-- <div class="form-group" formGroupName="guardian">
-    <mat-form-field appearance="outline" >
-      <mat-label>First Name</mat-label>
-      <input matInput placeholder="Enter first name" formControlName="firstName">
-      <mat-error *ngIf="hasError('guardian', 'firstName', 'required')">First name is required</mat-error>
-      <mat-error *ngIf="hasError('guardian', 'firstName', 'minlength')">First name must be at least 2 characters long</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" >
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Enter last name" formControlName="lastName">
-      <mat-error *ngIf="hasError('guardian', 'lastName', 'required')">Last name is required</mat-error>
-      <mat-error *ngIf="hasError('guardian', 'lastName', 'minlength')">Last name must be at least 2 characters long</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" >
-      <mat-label>Country</mat-label>
-      <input matInput placeholder="Enter Country" formControlName="country">
-      <mat-error *ngIf="hasError('guardian', 'country', 'required')">Country is required</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" >
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Enter Email" formControlName="email">
-      <mat-error *ngIf="hasError('guardian', 'email', 'required')">Email is required</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" >
-      <mat-label>Mobile</mat-label>
-      <input matInput placeholder="Enter Mobile" formControlName="mobile">
-      <mat-error *ngIf="hasError('guardian', 'mobile', 'required')">Mobile is required</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" >
-      <mat-label>Phone</mat-label>
-      <input matInput placeholder="Enter Phone" formControlName="phone">
-      <mat-error *ngIf="hasError('guardian', 'phone', 'required')">Phone is required</mat-error>
-    </mat-form-field>
-
-    <h3>Guardian Gender</h3>
-    <mat-radio-group formControlName="gender" class="gender-group">
-      <mat-radio-button *ngFor="let gender of genders" [value]="gender">
-        {{ gender }}
-      </mat-radio-button>
-    </mat-radio-group>
-    <mat-error *ngIf="hasError('guardian', 'gender', 'required')">Please select a gender</mat-error>
-  
-    <h3>Guardian Relationship</h3>
-    <mat-radio-group formControlName="relationship" class="relationship-group">
-      <mat-radio-button *ngFor="let relationship of relationships" [value]="relationship">
-        {{ relationship }}
-      </mat-radio-button>
-    </mat-radio-group>
-    <mat-error *ngIf="hasError('guardian', 'relation', 'required')">Please select a relation</mat-error>
-  
-
-  </div> -->
-
-  
-
   <h3>Consent</h3>
   <mat-checkbox formControlName="consentActivities">Agree to extracurricular activities.</mat-checkbox>
   <mat-error *ngIf="hasError('', 'consentActivities', 'requiredTrue')">You must agree to this consent</mat-error>

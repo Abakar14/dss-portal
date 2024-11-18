@@ -7,12 +7,12 @@ import { TeacherRegistrationFormComponent } from './teacher-registration-form/te
 
 export const routes: Routes = [
  
-  { path: '',component: TeachersComponent}, // Student List
-{ path: 'registration', component: TeacherRegistrationFormComponent},  // Student Registration
-{ path: ':id', component: TeacherDetailsComponent }, // Student Details
+  { path: '',             component: TeachersComponent}, 
+  { path: 'registration', component: TeacherRegistrationFormComponent },  
+  { path: ':id',          component: TeacherDetailsComponent }, 
+];
 
-  
-  ];
+
 
 @NgModule({
   declarations: [],

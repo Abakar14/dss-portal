@@ -10,8 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [],
   imports: [
     CommonModule,    
+    TeachersRoutingModule,
     ReactiveFormsModule,
-   TeachersRoutingModule
   ],
   providers: [
     TeacherService

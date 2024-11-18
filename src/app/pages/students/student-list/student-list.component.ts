@@ -59,26 +59,7 @@ export class StudentListComponent implements OnInit{
   }
   
 
-  // // Load students (with pagination if necessary)
-  // loadStudents(pageIndex: number = 0, pageSize: number = 10, sort: string = 'firstName',
-  //   order: string = 'asc',
-  //   search: string = ''): void {
 
-  //   this.studentService.getStudents(pageIndex, pageSize).subscribe((response: any) => {
-
-  //     if (response._embedded?.studentResponseDtoList) {
-  //       this.students.data = response._embedded.studentResponseDtoList;
-  //       this.totalStudents = response.page.totalElements; // Total elements in backend
-  //       this.paginator.pageIndex = pageIndex; // Current page
-  //       this.paginator.length = this.totalStudents; // Total items
-  //     } else {
-  //       console.error("No students returned from the server.");
-  //     }
-  //   }, error => {
-  //     console.error('Failed to load students', error);
-  //   });
-  // }
-  
 
   // Open Add Student modal
   openAddStudentModal(): void {
@@ -160,18 +141,6 @@ export class StudentListComponent implements OnInit{
     );
   }
 
-  
-  // onHeaderDoubleClick(column: string):void{
-  //   // Toggle sorting direction
-  //   const currentDirection = this.sort.direction || 'asc';
-  //   const newDirection = currentDirection === 'asc' ? 'desc' : 'asc';
-    
-  //   console.log(`Sorting by column: ${column}, Direction: ${newDirection}`);
-  // // Load students with new sort parameters
-  // this.loadStudents(this.paginator.pageIndex, this.paginator.pageSize, column, newDirection);
-
-
-  // }
 
 
 
