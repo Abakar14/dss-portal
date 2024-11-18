@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DSSService } from './dss.service';
 import { StudentDto } from '../model/StudentDto';
+import { Sort } from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,30 @@ export class StudentsService {
 
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
-  getStudents(pageIndex: number, pageSize: number): Observable<any> {
 
+  getStudents(
+    pageIndex: number,
+    pageSize: number,
+    sort: string = 'firstName',
+    order: string = 'asc',
+    search: string = ''
+  ): Observable<any> {
     const headers = this.dssService.getHeaders();
-  //console.log("getStudents()  headers : "+headers.get("Authorization"));
-
-    const params = new HttpParams()
+  
+    let params = new HttpParams()
       .set('page', pageIndex.toString())
-      .set('size', pageSize.toString());
+      .set('size', pageSize.toString())
+      .set('sort', `${sort},${order}`);
+  
+    // Add search query if provided
+    if (search) {
+      params = params.set('search', search);
+    }
   
     return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
   }
+  
+
 
 
   searchStudents(filterValue: string, page: number = 0, size: number = 10): Observable<any> {
@@ -74,4 +88,6 @@ export class StudentsService {
     return this.http.delete<void>(url, {headers});
 
   }
+
+
 }

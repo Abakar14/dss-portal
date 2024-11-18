@@ -12,7 +12,7 @@
     </mat-form-field>
   
     <!-- Table displaying students -->
-    <mat-table [dataSource]="students" matSort class="mat-elevation-z8">
+    <mat-table [dataSource]="students" matSort (matSortChange)="onSortChange($event)"  class="mat-elevation-z8">
 
      <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header > ID </mat-header-cell>
@@ -20,12 +20,12 @@
     </ng-container>
 
       <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> First Name</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header  (dblclick)="onHeaderDoubleClick('firstName')"> First Name</mat-header-cell>
         <mat-cell *matCellDef="let student"> {{ student.firstName }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header (dblclick)="onHeaderDoubleClick('lastName')"> Last Name </mat-header-cell>
         <mat-cell *matCellDef="let student"> {{ student.lastName }} </mat-cell>
       </ng-container>
   

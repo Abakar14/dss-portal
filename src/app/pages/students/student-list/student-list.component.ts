@@ -3,10 +3,10 @@ import { AddEditStudentModalComponent } from '../add-edit-student-modal/add-edit
 import { StudentsService } from '../../../services/students.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule} from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { CommonModule } from '@angular/common';
 import { StudentDto } from '../../../model/StudentDto';
 
@@ -23,6 +23,7 @@ export class StudentListComponent implements OnInit{
   displayedColumns: string[] = ['firstName', 'lastName', 'matNumber', 'actions']; // Columns to display in the table
   students = new MatTableDataSource<StudentDto>([]);; // Data source for the table
   totalStudents = 0; // Total number of students for pagination
+  currentSort: { column: string; direction: 'asc' | 'desc' } = { column: '', direction: 'asc' };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,23 +34,50 @@ export class StudentListComponent implements OnInit{
     this.loadStudents(); // Load the student list on initialization
   }
 
-  // Load students (with pagination if necessary)
-  loadStudents(pageIndex: number = 0, pageSize: number = 10): void {
-
-    this.studentService.getStudents(pageIndex, pageSize).subscribe((response: any) => {
-
-      if (response._embedded?.studentResponseDtoList) {
-        this.students.data = response._embedded.studentResponseDtoList;
-        this.totalStudents = response.page.totalElements; // Total elements in backend
-        this.paginator.pageIndex = pageIndex; // Current page
-        this.paginator.length = this.totalStudents; // Total items
-      } else {
-        console.error("No students returned from the server.");
-      }
-    }, error => {
-      console.error('Failed to load students', error);
-    });
+  loadStudents(
+    pageIndex: number = 0,
+    pageSize: number = 10,
+    sort: string = 'firstName',
+    order: string = 'asc',
+    search: string = ''
+  ): void {
+    this.studentService.getStudents(pageIndex, pageSize, sort, order, search).subscribe(
+        (response: any) => {
+          if (response._embedded?.studentResponseDtoList) {
+            this.students.data = response._embedded.studentResponseDtoList;
+            this.totalStudents = response.page.totalElements; // Total elements in backend
+            this.paginator.pageIndex = pageIndex; // Current page
+            this.paginator.length = this.totalStudents; // Total items
+          } else {
+            console.error("No students returned from the server.");
+          }
+        },
+        (error) => {
+          console.error('Failed to load students', error);
+        }
+      );
   }
+  
+
+  // // Load students (with pagination if necessary)
+  // loadStudents(pageIndex: number = 0, pageSize: number = 10, sort: string = 'firstName',
+  //   order: string = 'asc',
+  //   search: string = ''): void {
+
+  //   this.studentService.getStudents(pageIndex, pageSize).subscribe((response: any) => {
+
+  //     if (response._embedded?.studentResponseDtoList) {
+  //       this.students.data = response._embedded.studentResponseDtoList;
+  //       this.totalStudents = response.page.totalElements; // Total elements in backend
+  //       this.paginator.pageIndex = pageIndex; // Current page
+  //       this.paginator.length = this.totalStudents; // Total items
+  //     } else {
+  //       console.error("No students returned from the server.");
+  //     }
+  //   }, error => {
+  //     console.error('Failed to load students', error);
+  //   });
+  // }
   
 
   // Open Add Student modal
@@ -102,39 +130,55 @@ export class StudentListComponent implements OnInit{
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-  
-    if (filterValue) {
-      this.studentService.searchStudents(filterValue, this.paginator.pageIndex, this.paginator.pageSize).subscribe({
-        next: (response) => {
-          this.students.data = response._embedded?.studentResponseDtoList || [];
-          this.totalStudents = response.page?.totalElements || 0;
-        },
-        error: (err) => {
-          console.error('Failed to search students', err);
-        },
-      });
-    } else {
-      this.loadStudents(); // Reload original list if search input is cleared
-    }
+    this.loadStudents(0, this.paginator.pageSize, this.sort.active, this.sort.direction || 'asc', filterValue);
   }
-  
 
-  // applyFilter(event: Event): void {
+   // Handle sort changes
+   onSortChange(sort: Sort): void {
+    const { active, direction } = sort;
+    this.loadStudents(this.paginator.pageIndex, this.paginator.pageSize, active, direction || 'asc');
+  }
 
-  //   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+  onHeaderDoubleClick(column: string): void {
+    if (this.currentSort.column === column) {
+      // Toggle direction if the same column is clicked
+      this.currentSort.direction = this.currentSort.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+      // Reset to ascending if a different column is clicked
+      this.currentSort.column = column;
+      this.currentSort.direction = 'asc';
+    }
+    console.log(`Sorting by column: ${this.currentSort.column}, Direction: ${this.currentSort.direction}`);
+
+    // Load students with new sorting parameters
+    this.loadStudents(
+      this.paginator?.pageIndex || 0,
+      this.paginator?.pageSize || 10,
+      this.currentSort.column,
+      this.currentSort.direction
+    );
+  }
+
   
-  //   if (filterValue) {
-  //     this.studentService.searchStudents(filterValue).subscribe((response: any) => {
-  //       this.students.data = response._embedded.studentResponseDtoList; // Update table data
-  //       this.totalStudents = response.page.totalElements; // Update total students for pagination
-  //     }, error => {
-  //       console.error('Failed to search students', error);
-  //     });
-  //   } else {
-  //     // If no filter value, reload the original student list
-  //     this.loadStudents();
-  //   }
+  // onHeaderDoubleClick(column: string):void{
+  //   // Toggle sorting direction
+  //   const currentDirection = this.sort.direction || 'asc';
+  //   const newDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+    
+  //   console.log(`Sorting by column: ${column}, Direction: ${newDirection}`);
+  // // Load students with new sort parameters
+  // this.loadStudents(this.paginator.pageIndex, this.paginator.pageSize, column, newDirection);
+
+
   // }
-  
 
+
+
+ngAfterViewInit(): void {
+  this.students.sort = this.sort;
+}
+
+  
+  
 }
