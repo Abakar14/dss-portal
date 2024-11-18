@@ -1,70 +1,85 @@
 <div class="student-list-container">
-  <h2>Student List</h2>
-    <mat-toolbar color="primary">
-      <!-- <span>Student List</span> -->
-      <span class="spacer"></span>
-      <button mat-raised-button color="accent" [routerLink]="['/students/registration']">Register Student</button>
-      
-      </mat-toolbar>
-    <mat-form-field appearance="fill" class="search-bar">
+  <h2>Student Management</h2>
+  <mat-toolbar color="primary" class="toolbar">
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" [routerLink]="['/students/registration']">
+      <mat-icon>person_add</mat-icon> Register Student
+    </button>
+  </mat-toolbar>
+
+  <div class="search-toolbar">
+    <mat-form-field appearance="outline" class="search-bar">
       <mat-label>Search Students</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Search by firstName or lastName">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by first name or last name">
     </mat-form-field>
-  
-    <!-- Table displaying students -->
-    <mat-table [dataSource]="students" matSort (matSortChange)="onSortChange($event)"  class="mat-elevation-z8">
+  </div>
 
-     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header > ID </mat-header-cell>
-      <mat-cell *matCellDef="let student"> {{ student.id }} </mat-cell>
-    </ng-container>
+  <div class="table-container">
+    <mat-table [dataSource]="students" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
 
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="sortable-header">
+          ID
+        </mat-header-cell>
+        <mat-cell *matCellDef="let student"> {{ student.id }} </mat-cell>
+      </ng-container>
+
+      <!-- First Name Column -->
       <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header  (dblclick)="onHeaderDoubleClick('firstName')"> First Name</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef class="sortable-header" (click)="onHeaderDoubleClick('firstName')">
+          First Name
+          <mat-icon *ngIf="currentSort.column === 'firstName'" [ngClass]="{'asc': currentSort.direction === 'asc', 'desc': currentSort.direction === 'desc'}">
+            {{ currentSort.direction === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+          </mat-icon>
+        </mat-header-cell>
         <mat-cell *matCellDef="let student"> {{ student.firstName }} </mat-cell>
       </ng-container>
 
+      <!-- Last Name Column -->
       <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header (dblclick)="onHeaderDoubleClick('lastName')"> Last Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef class="sortable-header" (click)="onHeaderDoubleClick('lastName')">
+          Last Name
+          <mat-icon *ngIf="currentSort.column === 'lastName'" [ngClass]="{'asc': currentSort.direction === 'asc', 'desc': currentSort.direction === 'desc'}">
+            {{ currentSort.direction === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+          </mat-icon>
+        </mat-header-cell>
         <mat-cell *matCellDef="let student"> {{ student.lastName }} </mat-cell>
       </ng-container>
-  
-      <!-- Column for Matriculation Number -->
+
+      <!-- Matriculation Number Column -->
       <ng-container matColumnDef="matNumber">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Matriculation No. </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Matriculation No. </mat-header-cell>
         <mat-cell *matCellDef="let student"> {{ student.matNumber }} </mat-cell>
       </ng-container>
-  
-      <!-- Column for Actions -->
+
+      <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
         <mat-cell *matCellDef="let student">
-          <button mat-icon-button color="primary" (click)="openEditStudentModal(student)"  matTooltip="Edit Student!!">
+          <button mat-icon-button color="primary" (click)="openEditStudentModal(student)" matTooltip="Edit Student">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button  color="warn" (click)="confirmDeleteStudent(student.id)" matTooltip="Delete Student!!">
+          <button mat-icon-button color="warn" (click)="confirmDeleteStudent(student.id)" matTooltip="Delete Student">
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-icon-button  (click)="viewStudentDetails(student.id)" matTooltip="View Student">
-            <mat-icon>pageview</mat-icon>
+          <button mat-icon-button color="accent" (click)="viewStudentDetails(student.id)" matTooltip="View Details">
+            <mat-icon>visibility</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
-  
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  
     </mat-table>
-  
-    <!-- Pagination (optional) -->
-    <mat-paginator
+  </div>
+
+  <mat-paginator
     [length]="totalStudents"
     [pageSize]="10"
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
     (page)="onPageChange($event)">
   </mat-paginator>
-  
-  
-  </div>
-  
+</div>
