@@ -1,4 +1,4 @@
-import { Document } from './documentDto';
+import { Document } from '../documentDto';
 
 describe('Document', () => {
   it('should create an instance', () => {

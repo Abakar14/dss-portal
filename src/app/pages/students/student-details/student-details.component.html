@@ -1,40 +1,79 @@
-  <div *ngIf="student" class="student-details-container">
-    <!-- Profile Picture Section -->
-    <div class="profile-picture-section">
-      <img [src]="student.profilePictureUrl || 'assets/images/baraah_3.png'" alt="Profile Picture" class="profile-picture">
+<div *ngIf="student" class="student-details-container mat-elevation-z8">
+  <!-- Profile Picture Section -->
+  <div class="profile-picture-section">
+    <img 
+      [src]="student.profilePictureUrl || 'assets/images/default_profile.png'" 
+      alt="Profile Picture" 
+      class="profile-picture">
+    <div>
+      <button mat-stroked-button color="primary" (click)="document.getElementById('upload-button').click()">Change Picture</button>
       <input type="file" (change)="onProfilePictureChange($event)" accept="image/*" hidden id="upload-button">
-      <button mat-button color="primary" (click)="document.getElementById('upload-button').click()">Change Picture</button>
     </div>
-  <!-- Personal Information Section -->
-  <div class="personal-info-section">
+  </div>
+
+  <!-- Student Information Section -->
+  <div class="student-info-section">
     <h2>{{ student.firstName }} {{ student.lastName }}</h2>
+    <mat-divider></mat-divider>
     <p><strong>Date of Birth:</strong> {{ student.dateOfBirth | date: 'longDate' }}</p>
     <p><strong>Email:</strong> {{ student.email }}</p>
     <p><strong>Phone:</strong> {{ student.phone }}</p>
-    <p><strong>Address:</strong> {{ student.addressDto }}</p>
+    <!-- <p><strong>Nationality:</strong> {{ student.nationality }}</p> -->
   </div>
+
+  <!-- Address Section -->
+  <div class="address-section">
+    <h3>Address</h3>
+    <mat-divider></mat-divider>
+    <p><strong>Street:</strong> {{ student.addressDto.street }}, {{ student.addressDto.streetNumber }}</p>
+    <p><strong>Postal Code:</strong> {{ student.addressDto.postalCode }}</p>
+    <p><strong>City:</strong> {{ student.addressDto.city }}</p>
+  </div>
+
   <!-- Academic Information Section -->
   <div class="academic-info-section">
     <h3>Academic Information</h3>
+    <mat-divider></mat-divider>
     <p><strong>Matriculation Number:</strong> {{ student.matNumber }}</p>
-    <p><strong>Teachers:</strong></p>
-    <ul>
-      <li *ngFor="let teacher of student.teachers">{{ teacher.firstName }}</li>
-    </ul>
 
-    <p><strong>Enrolled Courses:</strong></p>
-    <ul>
-      <li *ngFor="let course of student.courses">{{ course }}</li>
-    </ul>
-   
+    <div>
+      <p><strong>Teachers:</strong></p>
+      <mat-list>
+        <mat-list-item *ngFor="let teacher of student.teachers">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <span mat-line>{{ teacher.firstName }} {{ teacher.lastName }}</span>
+          <!-- <span mat-line class="secondary-text">{{ teacher.subject }}</span> -->
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div>
+      <p><strong>Courses:</strong></p>
+      <mat-list>
+        <!-- <mat-list-item *ngFor="let course of student.courses">
+          <mat-icon mat-list-icon>book</mat-icon>
+          <span mat-line>{{ course.name }}</span>
+           <span mat-line class="secondary-text">{{ course.description }}</span> 
+                  </mat-list-item> -->
+      </mat-list>
+    </div>
   </div>
 
-<!-- <div class="container">
-    <h2>{{ student?.firstName }} {{ student?.lastName }}</h2>
-    <p><strong>Matriculation Number:</strong> {{ student?.matNumber }}</p>
-    <p><strong>Email:</strong> {{ student?.email }}</p>
-    <p><strong>Phone:</strong> {{ student?.phone }}</p>
-     <p><strong>Address:</strong> {{ student?.address }}</p> -->
-    <button type="button" routerLink="/students" class="btn btn-secondary">Back to List</button>
- </div> 
-  
+  <!-- Guardian Information Section -->
+  <div class="guardian-info-section">
+    <h3>Guardians</h3>
+    <mat-divider></mat-divider>
+    <!-- <div *ngFor="let guardian of student.guardians" class="guardian">
+      <p><strong>Name:</strong> {{ guardian.firstName }} {{ guardian.lastName }}</p>
+      <p><strong>Relationship:</strong> {{ guardian.relationship }}</p>
+      <p><strong>Phone:</strong> {{ guardian.phone }}</p>
+      <p><strong>Email:</strong> {{ guardian.email }}</p>
+    </div> -->
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button mat-raised-button color="primary" routerLink="/students">Back to List</button>
+    <button mat-raised-button color="accent" (click)="editStudent()">Edit Student</button>
+  </div>
+</div>

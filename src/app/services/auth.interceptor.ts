@@ -5,6 +5,7 @@ import { AuthenticationService } from './authentication.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthenticationService);
   const router = inject(Router);
@@ -17,11 +18,15 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401) {
         console.error("401 Unauthorized - Redirecting to login");
 
-        authService.logout(); // Clear tokens or any session data
-        router.navigate(['/login']).then(() => {
-          console.log("Redirected to login page due to unauthorized access.");
-        }).catch(err => {
-          console.error("Error navigating to login page:", err);
+        authService.refreshToken().subscribe({
+          next: () => {
+            console.log("Token refreshed successfully");
+          },
+          error: () => {
+            console.error("Token refresh failed, logging out");
+            authService.logout();
+            router.navigate(['/login']);
+          }
         });
       }
       return throwError(error);

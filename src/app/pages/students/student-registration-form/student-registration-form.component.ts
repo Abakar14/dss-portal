@@ -4,9 +4,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MaterialModule } from '../../../material/material.module';
 import { Router } from '@angular/router';
 import { BffService } from '../../../services/bff.service';
-import { DocumentType } from '../../../model/document-type';
+import { DocumentType } from '../../../model/enums/document-type';
 import { StudentDetailsCreateDto } from '../../../model/student-details-create-dto.model';
-import { Gender } from '../../../model/gender';
+import { Gender } from '../../../model/enums/gender';
 import { RelationShip } from '../../../model/relation-ship';
 
 
@@ -144,6 +144,7 @@ onSubmit() {
       if (documentType && file) {
         formData.append('files', file);
         formData.append('documentTypes', documentType);
+        formData.append('ownerType', 'STUDENT');
       }
     });
 

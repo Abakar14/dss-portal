@@ -3,11 +3,12 @@ import {  StudentDto } from '../../../model/StudentDto';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { StudentsService } from '../../../services/students.service';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../../../material/material.module';
 
 @Component({
   selector: 'bms-student-details',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MaterialModule],
   templateUrl: './student-details.component.html',
   styleUrl: './student-details.component.scss'
 })
@@ -44,6 +45,10 @@ export class StudentDetailsComponent implements OnInit {
     if(file){
       //handle profile picture upload logic here
     }
+  }
+
+  editStudent(){
+
   }
 
 }

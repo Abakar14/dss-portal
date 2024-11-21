@@ -1,5 +1,5 @@
-import { ContactLevel } from "./contact-level";
-import { Gender } from "./gender";
+import { ContactLevel } from "./enums/contact-level";
+import { Gender } from "./enums/gender";
 import { RelationShip } from "./relation-ship";
 import { AddressCreateDto } from "./school";
 import { Course, Teacher } from "./teacher";
