@@ -20,6 +20,7 @@ import { RelationShip } from '../../../model/relation-ship';
 })
 export class StudentRegistrationFormComponent implements OnInit{
 
+  schoolId: number = 1;
   registrationForm!: FormGroup;
   genders = Object.values(Gender);
   relationships = Object.values(RelationShip);
@@ -76,6 +77,7 @@ addGuardian() {
     country: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     mobile: ['', Validators.required],
+    schoolId: this.schoolId,
     phone: ['', Validators.required],
   });
   this.guardians.push(guardianGroup);
@@ -128,6 +130,7 @@ onSubmit() {
       studentCreateDto: {
         ...formValue.student,
         birthDate: formattedBirthDate,
+        schoolId: this.schoolId,
         gender: studentGenderKey,
         guardianCreateDtos, // Include all guardians here
       },
@@ -145,6 +148,7 @@ onSubmit() {
         formData.append('files', file);
         formData.append('documentTypes', documentType);
         formData.append('ownerType', 'STUDENT');
+        formData.append('schoolId', this.schoolId.toString());
       }
     });
 

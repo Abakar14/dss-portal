@@ -8,7 +8,7 @@
   <!-- Personal Information Section -->
   <div class="personal-info-section">
     <h2>{{ teacher.firstName }} {{ teacher.lastName }}</h2>
-    <p><strong>Date of Birth:</strong> {{ teacher.dateOfBirth | date: 'longDate' }}</p>
+    <p><strong>Date of Birth:</strong> {{ teacher.birthDate| date: 'longDate' }}</p>
     <p><strong>Email:</strong> {{ teacher.email }}</p>
     <p><strong>Phone:</strong> {{ teacher.phone }}</p>
     <p><strong>Address:</strong> {{ teacher.address }}</p>
@@ -19,14 +19,14 @@
     <p><strong>Matriculation Number:</strong> {{ teacher.matNumber }}</p>
     <p><strong>Teachers:</strong></p>
     <ul>
-      <li *ngFor="let teacher of teacher.teachers">{{ teacher.firstName }}</li>
+      
     </ul>
 
     <p><strong>Enrolled Courses:</strong></p>
     <ul>
       <li *ngFor="let course of teacher.courses">{{ course }}</li>
     </ul>
-    <p><strong>GPA:</strong> {{ teacher.gpa }}</p>
+  
   </div>
 
 <!-- <div class="container">

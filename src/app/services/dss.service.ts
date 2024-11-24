@@ -28,4 +28,13 @@ export class DSSService {
       }); 
 
   }
+
+
+  getHeadersToken():HttpHeaders{
+ 
+    return  new HttpHeaders({
+      'Authorization':`Bearer ${this.authService.getToken()}`        
+      }); 
+
+  }
 }

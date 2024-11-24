@@ -1,28 +1,38 @@
-import { AddressDto } from "./school";
+import AddressDto from "./school";
 
-export interface Teacher {
+export interface TeacherDto {
     id: number;
-     firstName: string;
-     lastName: string ;
-     email: string ;
-     phone: string ;
-     fileName: string ;
-     addedOn: Date;
-     modifiedOn: Date;
-     matNumber: string;
-     active:boolean;
-     insertedBy:string;
-     profilePictureUrl: string;
-     dateOfBirth: Date;
-     address: AddressDto;
-     courses: Course[];
-     teachers: Teacher[];
-     gpa:string;
+    firstName: string;
+    lastName: string ;
+    email: string ;
+    phone: string ;
+    fileName: string ;
+    birthDate: Date;
+    birthPlace: string;
+    addedOn: Date;
+    modifiedOn: Date;
+    matNumber: string;
+    active:boolean;
+    insertedBy:string;
+    profilePictureUrl: string;
+    address: AddressDto;
+    courses: CourseResponseDto[];
+   
+     
 }
 
-export interface Course{
+export interface CourseResponseDto{
     id: number;
     name: string;
-   
+    description: string;
+    deleted: boolean;
+    addedOn: string;
+    modifiedOn: string;
+    active: boolean;
+    updatedBy : string;
+    addedBy: string;
+    modifiedBy:string;
+    documentIds: Number []; 
+    teacher: TeacherDto;
     
 }

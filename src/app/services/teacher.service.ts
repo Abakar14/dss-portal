@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DSSService } from './dss.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { Teacher } from '../model/teacher';
+import { TeacherDto } from '../model/teacher';
 
 @Injectable({
   providedIn: 'root'
@@ -57,23 +57,23 @@ export class TeacherService {
 
   }
 
-  getTeacherById(teacherId: number):Observable<Teacher>{
+  getTeacherById(teacherId: number):Observable<TeacherDto>{
 
     const headers = this.dssService.getHeaders();
     const url = `${this.apiUrl}/teachers/${teacherId}`;
 
-    return this.http.get<Teacher>(url, {headers});
+    return this.http.get<TeacherDto>(url, {headers});
   }
 
-  addTeacher(teacher: Teacher):Observable<Teacher>{
+  addTeacher(teacher: TeacherDto):Observable<TeacherDto>{
     const headers = this.dssService.getHeaders();
-    return this.http.post<Teacher>(this.apiUrl+"/teachers", teacher, { headers })
+    return this.http.post<TeacherDto>(this.apiUrl+"/teachers", teacher, { headers })
   }
 
-  updateTeacher(teacherId: number, teacher: Teacher): Observable<Teacher>{
+  updateTeacher(teacherId: number, teacher: TeacherDto): Observable<TeacherDto>{
     const headers = this.dssService.getHeaders();
     const url = `${this.apiUrl}/teachers/${teacherId}`;
-    return this.http.put<Teacher>(url, teacher, { headers })
+    return this.http.put<TeacherDto>(url, teacher, { headers })
 
 
   }

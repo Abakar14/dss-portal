@@ -23,6 +23,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 const MaterialComponents = [
@@ -50,7 +51,8 @@ const MaterialComponents = [
   MatMenuModule,
   MatExpansionModule,
   ReactiveFormsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDividerModule
 
   
 ]

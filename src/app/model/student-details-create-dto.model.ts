@@ -2,7 +2,8 @@ import { ContactLevel } from "./enums/contact-level";
 import { Gender } from "./enums/gender";
 import { RelationShip } from "./relation-ship";
 import { AddressCreateDto } from "./school";
-import { Course, Teacher } from "./teacher";
+import { CourseResponseDto, TeacherDto } from "./teacher";
+
 
 
 export interface StudentDetailsCreateDto {
@@ -19,18 +20,20 @@ export interface StudentCreateDto {
     firstName: string;
     lastName: string ;
     email: string ;
-    phone: string ;    
+    phone: string ;
+    schoolId: number;    
     birthDate: string;
     dateOfBirth: string;
     gender:Gender;
     addressCreateDto: AddressCreateDto;
     guardianCreateDtos: GuardianCreateDto[];
-    courses: Course[];
-    teachers: Teacher[];   
+    courses: CourseResponseDto[];
+    teachers: TeacherDto[];   
 }
 
 export interface GuardianCreateDto{
    
+    schoolId: number;    
     firstName: string;
     lastName: string;
     country: string;

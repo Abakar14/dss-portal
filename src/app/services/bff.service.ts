@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DSSService } from './dss.service';
 import { Observable } from 'rxjs';
+import { StudentDto } from '../model/StudentDto';
 
 
 @Injectable({
@@ -20,30 +21,16 @@ export class BffService {
      
     return this.http.post<any>(`${this.apiUrl}/student-details`, formData, { headers });
   }
+
+  getStudentDetailsById(studentId: number):Observable<StudentDto>{
+
+    const headers = this.dssService.getHeaders();
+   
+    const url = `${this.apiUrl}/student-details/${studentId}`;
+    
+
+    return this.http.get<StudentDto>(url, {headers});
+  }
   
-  // add(studentDetails: StudentDetails){
-
-  //   fetch(this.apiUrl+"/student-details", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer your_token_here' // Or other auth header
-  //     },
-  //     body: JSON.stringify(studentDetails),
-  //     credentials: 'include' // Important for cookies
-  //   })
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       // Handle errors appropriately
-  //       if (response.status === 401) {
-  //         // Redirect to login or show an error message
-  //         console.error("Unauthorized");
-  //       }
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     return response.json();
-  //   }) 
-
-  // }
 
 }

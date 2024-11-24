@@ -7,7 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RouterModule, Router } from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
-import { Teacher } from '../../../model/teacher';
+import { TeacherDto } from '../../../model/teacher';
 import { AddEditTeacherModalComponent } from '../add-edit-teacher-modal/add-edit-teacher-modal.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { AddEditTeacherModalComponent } from '../add-edit-teacher-modal/add-edit
 export class TeachersComponent {
 
   displayedColumns: string[] = ['firstName', 'lastName', 'matNumber', 'actions']; // Columns to display in the table
-  teachers = new MatTableDataSource<Teacher>([]);; // Data source for the table
+  teachers = new MatTableDataSource<TeacherDto>([]);; // Data source for the table
   totalTeachers = 0; // Total number of students for pagination
   currentSort: { column: string; direction: 'asc' | 'desc' } = { column: '', direction: 'asc' };
 
