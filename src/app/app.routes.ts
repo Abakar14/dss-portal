@@ -5,6 +5,10 @@ import { authGuard } from './services/guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { ManageUsersComponent } from './pages/admin/manage-users/manage-users.component';
+import { ManageRolesComponent } from './pages/admin/manage-roles/manage-roles.component';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { RoleDetailsComponent } from './pages/admin/role-details/role-details.component';
 
 export const routes: Routes = [
   //public Routes
@@ -18,9 +22,21 @@ export const routes: Routes = [
       { path: 'teachers', loadChildren: () => import("../app/pages/teachers/teachers.module").then(m => m.TeachersModule) },
       { path: 'documents', loadChildren: () => import("../app/pages/documents/documents.module").then(m => m.DocumentsModule) },
       { path: 'admin-dashboard', component: AdminDashboardComponent },
+      { path: 'users', component: ManageUsersComponent, 
+        canActivate: [authGuard],
+        data: {roles: ['MANAGE_USERS']},
+       
+       },
+       
+      { path: 'roles', component: ManageRolesComponent,
+        canActivate: [authGuard],
+        data: {roles: ['MANAGE_USERS']}
+       },
+       { path: 'roles/:id', component: RoleDetailsComponent },
  
      ],
   },
-
+{path: 'access-denied', component: AccessDeniedComponent},
+{ path: '**', redirectTo: '/' },
   { path: '**', component: NotFoundComponent }, //Wildcard route for a 404 page
 ];

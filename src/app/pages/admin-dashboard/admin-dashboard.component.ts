@@ -4,13 +4,14 @@ import { UserService } from '../../services/user.service';
 
 import { CommonModule } from '@angular/common';
 import { LoggingService } from '../../services/logging.service';
-import { error } from 'console';
 import { UserProfile } from '../../model/user';
+import { RouterModule } from '@angular/router';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'bms-admin-dashboard',
   standalone: true,
-  imports: [MaterialModule, CommonModule],
+  imports: [MaterialModule, CommonModule, RouterModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
@@ -18,12 +19,13 @@ export class AdminDashboardComponent  implements OnInit{
   totalUsers: number = 0;
   totalRoles: number = 0;
   totalLogs: number = 0;
+  totalPermissions: number = 0;
   users: UserProfile[] = [];
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
   logs: any[] = [];
   logColumns: string[] = ['timestamp', 'event', 'user', 'description'];  // Log table columns
 
-  constructor(private userService: UserService, private loggingService: LoggingService) {}
+  constructor(private userService: UserService,private roleService: RoleService,  private loggingService: LoggingService) {}
 
   ngOnInit(): void {
     this.loadSummaryData();
@@ -68,8 +70,12 @@ export class AdminDashboardComponent  implements OnInit{
       this.totalUsers = total;
     });
 
-    this.userService.getTotalRoles().subscribe(total => {
+    this.roleService.getTotalRoles().subscribe(total => {
       this.totalRoles = total;
+    });
+
+    this.userService.getTotalPermissions().subscribe(total => {
+      this.totalPermissions = total;
     });
 
     // this.userService.getTotalLogs().subscribe(total => {
@@ -80,7 +86,7 @@ export class AdminDashboardComponent  implements OnInit{
   // Load users for the user management table
   loadUsers() {
     this.userService.getUsers().subscribe((response: any) => {
-      this.users = response._embedded.userDtoList;
+      this.users = response;
     });
   }
 

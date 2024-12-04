@@ -14,7 +14,7 @@ import { jwtDecode } from "jwt-decode";
 export class AuthenticationService {
 
   private authUrl = 'http://localhost:8081/dss/api/v1/auth';
-  private usersUrl = 'http://localhost:8081/dss/api/v1/users';
+  private usersUrl = 'http://localhost:9090';
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
   private username = 'username';
@@ -50,11 +50,20 @@ export class AuthenticationService {
     );
   }
 
+  getUserRoles(): string[] {
+    const token = this.getToken();
+    if (!token) return [];
+  
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+    return payload.roles || []; // Return roles from the payload
+  }
+  
+
   getUserProfile():Observable<UserProfile>{
     console.log("AuthenticationService getUserProfile()....");
     const username = this.cookieService.getCookie(this.username);
     // const headers = this.dssService.getHeaders();
-    const url = `${this.usersUrl}/username?username=`+username;
+    const url = `${this.usersUrl}/users/username?username=`+username;
     // console.log("getStudents()  headers : "+headers.get("Authorization"));
     const headers =  new HttpHeaders({
       'Authorization':`Bearer ${this.cookieService.getCookie(this.tokenKey)}`     

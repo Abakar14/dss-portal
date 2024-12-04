@@ -1,0 +1,16 @@
+.admin-dashboard {
+    .quick-links {
+      display: flex;
+      gap: 16px;
+    }
+  }
+  
+  .user-management-container,
+  .role-management-container {
+    padding: 16px;
+  
+    mat-table {
+      margin-top: 16px;
+    }
+  }
+  

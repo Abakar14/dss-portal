@@ -1,4 +1,4 @@
-<mat-card *ngIf="!isLoading && hasRole('ROLE_ADMIN')" class="admin-dashboard-card"  routerLink="/admin-dashboard">
+<mat-card *ngIf="!isLoading && hasPermission('MANAGE_USERS')" class="admin-dashboard-card"  routerLink="/admin-dashboard">
   <mat-icon class="admin-icon">admin_panel_settings</mat-icon>
   <h3>Admin Dashboard</h3>
   <p>Access administrative tools and settings.</p>
@@ -29,7 +29,7 @@
       </mat-card>
 
       <!-- Only show Teachers section if user has ROLE_ADMIN or ROLE_TEACHER -->
-      <mat-card *ngIf="hasRole('ROLE_ADMIN') || hasRole('ROLE_TEACHER')" class="dashboard-card" routerLink="/teachers">
+      <mat-card *ngIf="hasPermission('MANAGE_USERS') || hasPermission('VIEW_STUDENTS') || hasRole('ROLE_TEACHER')" class="dashboard-card" routerLink="/teachers">
         <mat-icon>school</mat-icon>
         <h3>Manage Teachers</h3>
         <p>Total: {{ totalTeachers }}</p>

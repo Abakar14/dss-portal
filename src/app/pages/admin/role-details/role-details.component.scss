@@ -1,0 +1,79 @@
+.role-details-container {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  h2 {
+    margin-bottom: 16px;
+    color: #3f51b5;
+  }
+
+  .status {
+    font-weight: bold;
+    &.active {
+      color: green;
+    }
+    &.inactive {
+      color: red;
+    }
+  }
+
+  .permissions-container {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+
+    mat-list-item {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+
+      mat-icon {
+        color: green;
+        margin-right: 16px;
+        font-size: 24px;
+      }
+
+      .permission-details {
+        display: flex;
+        flex-direction: column;
+
+        mat-line {
+          margin-bottom: 4px;
+
+          &.secondary {
+            font-size: 0.875rem;
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+
+  .child-roles-container {
+    margin-top: 24px;
+
+    .child-role-card {
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+
+      h4 {
+        margin-bottom: 8px;
+        color: #3f51b5;
+      }
+
+      .child-permissions {
+        max-height: 150px;
+        overflow-y: auto;
+        margin-top: 8px;
+      }
+    }
+  }
+}

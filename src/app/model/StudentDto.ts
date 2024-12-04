@@ -42,6 +42,7 @@ export interface StudentDto {
      chronic_illnesse: string;
      doctorName: string;
      doctorAddress: string;
+     classeResponseDto: CourseResponseDto;
      communicationType: CommunicationType;
      addressResponseDto: AddressResponseDto;
      guardianResponseDtos: GuardianDto[];

@@ -15,7 +15,7 @@ import { MaterialModule } from '../../material/material.module';
 })
 export class LoginComponent{
   
-  //[x: string]: any;
+  hidePassword = true;
 
    loginForm: FormGroup;
     errorMessage= '';
@@ -66,6 +66,11 @@ export class LoginComponent{
    
   
 
+}
+
+
+togglePasswordVisibility(): void {
+  this.hidePassword = !this.hidePassword;
 }
 
 

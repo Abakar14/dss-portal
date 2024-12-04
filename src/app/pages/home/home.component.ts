@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { StudentsService } from '../../services/students.service';
 import { TeacherService } from '../../services/teacher.service';
-import { DocumentService } from '../../services/document.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { UserProfile } from '../../model/user';
-import { BffService } from '../../services/bff.service';
+import { Role, UserProfile } from '../../model/user';
 
 
 @Component({
   selector: 'bms-home',
   standalone: true,
-  imports: [MaterialModule, CommonModule, RouterOutlet, RouterModule,],
+  imports: [MaterialModule, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -25,13 +23,12 @@ export class HomeComponent implements OnInit {
   totalTeachers: number = 0;
   totalDocuments: number = 0;
   isLoading: boolean = true;
+  userPermissions!: string[];
 
 
 
   constructor(private studentService: StudentsService, 
   private teacherService: TeacherService, 
-  private documentService: DocumentService,
-  private bffService: BffService,
   private authService: AuthenticationService 
   ){}
 
@@ -49,17 +46,37 @@ export class HomeComponent implements OnInit {
     this.authService.getUserProfile().subscribe(
       (user: UserProfile) => {
         this.userName = `${user.firstname} ${user.lastname}`;
-        this.userRoles = user.roles.map(role => role.name);
+
+        const allRoles = this.flattenRoles(user.role);
+        this.userRoles = allRoles.map(role => role.name);
+
+        // this.userRoles = user.role.childRoles.map(role => role.name);
+
+        const allPermissions = new Set<string>();
+        allRoles.forEach(role => {
+          role.permissions?.forEach(permission => allPermissions.add(permission.name))
+        });
+        
+        this.userPermissions = Array.from(allPermissions);
+
         this.isLoading = false;
+        console.log("User Roles: ", this.userRoles);
+        console.log("User Permissions: ", this.userPermissions);
       },
       (error) => {
         console.error('Error fetching user profile:', error);
         this.isLoading = false;
-        // Optionally handle errors, e.g., redirect to login if unauthorized
+       
       }
     );
+  }
 
-
+  private flattenRoles(role: Role): Role[] {
+    const roles: Role[] = [role];
+    role.childRoles?.forEach(childRole => {
+      roles.push(...this.flattenRoles(childRole));
+    });
+    return roles;
   }
 
   fetchStatistics(){
@@ -80,6 +97,10 @@ export class HomeComponent implements OnInit {
     // Helper method to check for a specific role
     hasRole(role: string): boolean {
       return this.userRoles.includes(role);
+    }
+
+    hasPermission(permission: string): boolean {
+      return this.userPermissions.includes(permission);
     }
 
 

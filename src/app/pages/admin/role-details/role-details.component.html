@@ -1,0 +1,64 @@
+<div class="role-details-container mat-elevation-z8">
+  <h2>{{ role.name }}</h2>
+  <p><strong>Description:</strong> {{ role.description }}</p>
+  <p>
+    <strong>Status:</strong>
+    <span class="status" [ngClass]="role.isActive ? 'active' : 'inactive'">
+      {{ role.isActive ? 'Active' : 'Inactive' }}
+    </span>
+  </p>
+  <p>
+    <strong>Added By:</strong> {{ role.addedBy }} on {{ role.addedOn | date: 'long' }}
+  </p>
+  <p>
+    <strong>Last Modified By:</strong> {{ role.modifiedBy || 'N/A' }} on {{ role?.modifiedOn | date: 'long' }}
+  </p>
+
+  <h3>Permissions</h3>
+  <div class="permissions-container">
+    <mat-list *ngIf="role?.permissions; else noPermissions">
+      <mat-list-item *ngFor="let permission of role?.permissions">
+        <mat-icon mat-list-icon>check_circle</mat-icon>
+        <div class="permission-details">
+          <div mat-line>{{ permission.name }}</div>
+          <div mat-line class="secondary">{{ permission.description }}</div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <ng-template #noPermissions>
+    <p>No permissions assigned to this role.</p>
+  </ng-template>
+
+  <h3>Child Roles</h3>
+  <div class="child-roles-container">
+    <mat-card *ngFor="let childRole of role?.childRoles" class="child-role-card">
+      <h4>{{ childRole.name }}</h4>
+      <p><strong>Description:</strong> {{ childRole.description }}</p>
+      <p>
+        <strong>Status:</strong>
+        <span class="status" [ngClass]="childRole.isActive ? 'active' : 'inactive'">
+          {{ childRole.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </p>
+      <p><strong>Permissions:</strong></p>
+      <div class="child-permissions">
+        <mat-list *ngIf="childRole.permissions?.length; else noChildPermissions">
+          <mat-list-item *ngFor="let permission of childRole.permissions">
+            <mat-icon mat-list-icon>check_circle</mat-icon>
+            <div class="permission-details">
+              <div mat-line>{{ permission.name }}</div>
+              <div mat-line class="secondary">{{ permission.description }}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <ng-template #noChildPermissions>
+          <p>No permissions assigned to this child role.</p>
+        </ng-template>
+      </div>
+    </mat-card>
+  </div>
+
+  <button mat-raised-button color="primary" routerLink="/roles">Back to Roles</button>
+</div>

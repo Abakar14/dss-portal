@@ -18,11 +18,37 @@ export default interface AddressResponseDto {
     city: string ;
     postalCode: string;
     isActive:boolean;
+    modifiedBy: string;
     addedOn: string;
     modifiedOn: string;
     addedBy: string;
     country: string;
 }
 
+
+export default interface ClasseResponseDto {
+
+    id: number;
+    schoolId: number;
+    name: string;
+    description: string;   
+    isActive:boolean;
+    addedOn: string;
+    modifiedOn: string;
+    addedBy: string;
+    modifiedBy: string;
+}
+
+
 export interface Employee {
 }
+
+
+
+
+
+
+
+
+
+    
