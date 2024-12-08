@@ -90,9 +90,9 @@ export class StudentListComponent implements OnInit{
   // Confirm delete action
   confirmDeleteStudent(studentId: number): void {
     if (confirm('Are you sure you want to delete this student?')) {
-      // this.studentService.deleteStudent(studentId).subscribe(() => {
-      //   this.loadStudents(); // Refresh the list after deletion
-      // });
+       this.studentService.deleteStudent(studentId).subscribe(() => {
+         this.loadStudents(); // Refresh the list after deletion
+       });
     }
   }
 

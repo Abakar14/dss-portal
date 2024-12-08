@@ -11,10 +11,22 @@
       alt="Profile Picture" 
       class="profile-picture">
     <div>
+      <button mat-stroked-button color="primary" (click)="onChangeProfilePicture()">
+        Change profile picture
+      </button>
+      <input #fileInput type="file" (change)="onProfilePictureChange($event)" accept="image/*" hidden>
+    </div>
+  </div>
+  <!-- <div class="profile-picture-section">
+    <img 
+      [src]="profilePictureUrl || 'assets/images/default_profile.png'" 
+      alt="Profile Picture" 
+      class="profile-picture">
+    <div>
       <button mat-stroked-button color="primary" (click)="document.getElementById('upload-button').click()">Change Picture</button>
       <input type="file" (change)="onProfilePictureChange($event)" accept="image/*" hidden id="upload-button">
     </div>
-  </div>
+  </div> -->
 
   <!-- Student Information Section -->
   <div class="student-info-section">
@@ -56,13 +68,13 @@
     </div>
 
 
-    <div class="class-section">
+    <!-- <div class="class-section">
       <h3>Classe</h3>
       <mat-divider></mat-divider>
       <p><strong>Classename: </strong> {{ student.classeResponseDto.name}}</p>
       <p><strong>Classe Discription:</strong> {{ student.classeResponseDto.description }}</p>
  
-    </div>   
+    </div>    -->
 
     <div>
       <p><strong>Courses:</strong></p>
@@ -96,6 +108,6 @@
   <!-- Actions -->
   <div class="actions">
     <button mat-raised-button color="primary" routerLink="/students">Back to List</button>
-    <button mat-raised-button color="accent" (click)="editStudent()">Edit Student</button>
+    <button mat-raised-button color="accent" (click)="openEditStudentModal(student)">Edit Student</button>
   </div>
 </div>

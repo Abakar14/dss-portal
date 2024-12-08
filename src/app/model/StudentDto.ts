@@ -51,6 +51,42 @@ export interface StudentDto {
    
 }
 
+export interface StudentUpdateDto {
+    
+
+     schoolId: number;
+     firstName: string;
+     lastName: string ;
+     gender: Gender;
+     email: string ;
+     phone: string ;
+     mobile: string ;
+     birthDate: Date;
+     birthPlace: string;
+     country: string ;
+     fileName: string ;
+     addedOn: Date;
+     modifiedOn: Date;
+     modifiedBy: string;
+     matNumber: string;
+     active:boolean;
+     addedBy:string;
+     profilePictureUrl: string;
+     addressId: number;
+     nameOfSchoolBefore: string;
+     schoolLevel: string;
+     hasCertificate: boolean;
+     certificate: string;
+     chronic_illnesse: string;
+     doctorName: string;
+     doctorAddress: string;
+     communicationType: CommunicationType;
+     courseIds: number[];
+     documentsIds: number[];
+     guardianIds: number[];
+   
+}
+
 
 export interface GuardianDto{
      id: number;

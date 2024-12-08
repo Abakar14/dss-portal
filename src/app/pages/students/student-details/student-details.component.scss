@@ -7,21 +7,41 @@
   border-radius: 8px;
 
   .profile-picture-section {
-    grid-column: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-
+    gap: 20px;
+  
     .profile-picture {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #1976d2;
+      border: 2px solid #ccc;
+    }
+  
+    button {
+      font-size: 14px;
+      font-weight: bold;
     }
   }
+  
+
+  // .profile-picture-section {
+  //   grid-column: 1;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: center;
+  //   gap: 10px;
+
+  //   .profile-picture {
+  //     width: 150px;
+  //     height: 150px;
+  //     border-radius: 50%;
+  //     object-fit: cover;
+  //     border: 3px solid #1976d2;
+  //   }
+  // }
 
   .student-info-section,
   .address-section,

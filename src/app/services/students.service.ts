@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DSSService } from './dss.service';
-import { StudentDto } from '../model/StudentDto';
+import { StudentDto, StudentUpdateDto } from '../model/StudentDto';
 import { Sort } from '@angular/material/sort';
 
 @Injectable({
@@ -75,9 +75,9 @@ export class StudentsService {
     return this.http.post<StudentDto>(this.apiUrl+"/students", student, { headers })
   }
 
-  updateStudent(studentId: number, student: StudentDto): Observable<StudentDto>{
+  updateStudent(studentId: number, student: StudentUpdateDto): Observable<StudentDto>{
     const headers = this.dssService.getHeaders();
-    const url = `${this.apiUrl}/student/${studentId}`;
+    const url = `${this.apiUrl}/students/${studentId}`;
     return this.http.put<StudentDto>(url, student, { headers })
 
 
