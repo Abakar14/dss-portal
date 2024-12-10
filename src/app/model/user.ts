@@ -1,6 +1,22 @@
 import { Gender } from "./enums/gender";
 
 export interface User {
+
+  id: number;
+  schoolId:number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  gender: Gender;
+  email: string;
+  addedBy: string;
+  modifiedBy:string;
+  role: Role;
+  isActive: boolean;
+  addedOn: string;
+  modifiedOn: string;
+  deleted:boolean;
+
 }
 
 export interface UserProfile {

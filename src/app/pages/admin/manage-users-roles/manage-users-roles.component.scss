@@ -1,0 +1,30 @@
+.user-role-management-container {
+    mat-table {
+      width: 100%;
+      margin-top: 20px;
+  
+      mat-header-cell, mat-cell {
+        text-align: center;
+      }
+  
+      mat-radio-group {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  
+    .actions {
+      margin-top: 20px;
+      text-align: right;
+    }
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    button {
+      margin-top: 10px;
+    }
+  }
+  

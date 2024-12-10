@@ -1,16 +1,14 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component} from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { MatSidenav } from '@angular/material/sidenav';
 
 
 @Component({
   selector: 'bms-header',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule, MaterialModule,
-    AsyncPipe],
+  imports: [CommonModule, RouterModule, MaterialModule],
     
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

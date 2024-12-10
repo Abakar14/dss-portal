@@ -10,19 +10,17 @@ import { Role, User, UserCreateDto, UserProfile } from '../model/user';
 })
 export class UserService {
 
-
   private usersUrl = 'http://localhost:9090/users';
-  private rolesUrl = 'http://localhost:9090/roles';
   private permissionsUrl = 'http://localhost:9090/permissions';
 
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
 
-  getUsers():Observable<UserProfile[]>{
+  getUsers():Observable<User[]>{
     const headers = this.dssService.getHeaders();
       console.log("getStudents()  headers : "+headers.get("Authorization"));
  
-     return this.http.get<UserProfile[]>(`${this.usersUrl}/list`, { headers });
+     return this.http.get<User[]>(`${this.usersUrl}/list`, { headers });
        
    }
 
@@ -31,18 +29,6 @@ export class UserService {
      return this.http.get<number>(`${this.usersUrl}/count`, {headers});
 
    }
-
-   getTotalRoles():Observable<number>{
-    const headers = this.dssService.getHeaders();
-    return this.http.get<number>(`${this.rolesUrl}/count`, {headers});
-   }
-
-   getRoles():Observable<Role[]>{
-    const headers = this.dssService.getHeaders();
-    return this.http.get<Role[]>(`${this.rolesUrl}/list`, {headers});
-   }
-
-
 
    getTotalPermissions():Observable<number>{
     const headers = this.dssService.getHeaders();
@@ -64,6 +50,20 @@ export class UserService {
     throw new Error('Method not implemented.');
   }
 
-   getTotalLogs(){}
+
+  addRoleToUser(userId: number, roleId: number): Observable<any> {
+    const headers = this.dssService.getHeaders();
+    return this.http.post<any>(`${this.usersUrl}/${userId}/roles/${roleId}`,null, { headers });
+  }
+  
+  removeRoleFromUser(userId: number, roleId: number): Observable<any> {
+    const headers = this.dssService.getHeaders();
+    return this.http.delete<any>(`${this.usersUrl}/${userId}/roles/${roleId}`, { headers });
+  }
+
+
+  
+
+  
 
 }

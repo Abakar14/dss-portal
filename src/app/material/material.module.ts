@@ -24,7 +24,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
-
+import {MatChipsModule} from '@angular/material/chips';
 
 const MaterialComponents = [
   MatButtonModule,  
@@ -53,6 +53,7 @@ const MaterialComponents = [
   ReactiveFormsModule,
   MatSelectModule,
   MatDividerModule,
+  MatChipsModule,
 
 
 

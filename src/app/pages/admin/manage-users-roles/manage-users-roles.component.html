@@ -1,0 +1,39 @@
+<div class="user-role-management-container">
+    <h2>User Role Management</h2>
+    <mat-table [dataSource]="users" class="mat-elevation-z8">
+      <!-- First Column: User Names -->
+      <ng-container matColumnDef="users">
+        <mat-header-cell *matHeaderCellDef>Users</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.firstname }} {{ user.lastname }}</mat-cell>
+      </ng-container>
+  
+      <!-- Dynamic Columns for Roles -->
+      <ng-container *ngFor="let role of availableRoles" [matColumnDef]="role.name">
+        <mat-header-cell *matHeaderCellDef>{{ role.name }}</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <mat-radio-group
+            [value]="user.role?.id"
+            (change)="onRoleChange(user.id, role.id, $event.value === role.id)">
+            <mat-radio-button
+              [value]="role.id"
+              [checked]="user.role?.id === role.id">
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Header Row -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  
+      <!-- Data Rows -->
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+    <!-- Save Changes Button -->
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="saveChanges()">Save Changes</button>
+    </div>
+  
+    <button mat-raised-button color="accent" routerLink="/admin-dashboard">Go Back to Home</button>
+  </div>
+  

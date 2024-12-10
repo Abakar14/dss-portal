@@ -28,7 +28,7 @@ export class ManageRolesComponent {
   }
 
   loadRoles(): void {
-    this.roleService.getAllRoles().subscribe((roles) => {
+    this.roleService.getRoles().subscribe((roles) => {
       this.roles.data = roles;
     });
   }

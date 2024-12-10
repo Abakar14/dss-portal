@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material/material.module';
 import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/enums/gender';
-import { Role, UserCreateDto } from '../../../model/user';
+import { Role, RoleDto, UserCreateDto } from '../../../model/user';
+import { RoleService } from '../../../services/role.service';
 
 @Component({
   selector: 'bms-add-edit-user-dialog',
@@ -19,13 +20,14 @@ export class AddEditUserDialogComponent implements OnInit {
   hidePassword = true; // Default password visibility
   userForm: FormGroup;
   genders = Object.values(Gender); // Get values of the Gender enum
-  roles: Role[] = [];
+  roles: RoleDto[] = [];
 
 
   constructor(
     public dialogRef: MatDialogRef<AddEditUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
+    private roleService: RoleService, 
     private userService: UserService
   ) {
     this.userForm = this.fb.group({
@@ -55,7 +57,7 @@ export class AddEditUserDialogComponent implements OnInit {
       console.log('Form Value:', value);
     });
 
-    this.userService.getRoles().subscribe((roles: Role[]) => {
+    this.roleService.getRoles().subscribe((roles: RoleDto[]) => {
       this.roles = roles;
     });
   }

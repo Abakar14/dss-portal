@@ -14,7 +14,7 @@
 - [ ] Integration of WordPress with Angular to have a public and private sections
 - [ ] By adding student adding document with new student update student documents lists(ids) backend
 - [ ] By adding student registeration get die consents data from Server
-- [ ] 
+- [ ] configurable Show student columns 
 
 
 ### In Progress

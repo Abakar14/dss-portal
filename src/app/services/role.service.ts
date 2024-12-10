@@ -8,7 +8,8 @@ import { Role, RoleDto } from '../model/user';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleService {
+export class RoleService { 
+
 
   private rolesUrl = 'http://localhost:9090/roles';
 
@@ -19,14 +20,38 @@ export class RoleService {
     return this.http.get<number>(`${this.rolesUrl}/count`, {headers});
    }
   
-  getAllRoles():Observable<RoleDto[]> {
+  getRoles():Observable<RoleDto[]> {
     const headers = this.dssService.getHeaders();
     return this.http.get<RoleDto[]>(`${this.rolesUrl}/list`, {headers});
   }
+
+
+  getDetailsRoles():Observable<RoleDto[]> {
+    const headers = this.dssService.getHeaders();
+    return this.http.get<RoleDto[]>(`${this.rolesUrl}/details`, {headers});
+  }
+
 
   getRoleById(roleId: number): Observable<Role> {
     const headers = this.dssService.getHeaders();
      console.log("getRoleById(roleId: number) "+roleId);
     return this.http.get<Role>(`${this.rolesUrl}/${roleId}/details`, {headers});
   }
+
+
+  addPermissionToRole(roleId: number, permissionId: number): Observable<any> {
+    const headers = this.dssService.getHeaders();
+    console.log("getRoleById(roleId: number) "+roleId);
+
+    return this.http.post(`${this.rolesUrl}/${roleId}/permissions/${permissionId}`,{}, { headers });
+  }
+  
+  removePermissionFromRole(roleId: number, permissionId: number): Observable<any> {
+    const headers = this.dssService.getHeaders();
+    console.log("getRoleById(roleId: number) "+roleId);
+    return this.http.delete(`${this.rolesUrl}/roles/${roleId}/permissions/${permissionId}`, { headers });
+  }
+
+
+
 }

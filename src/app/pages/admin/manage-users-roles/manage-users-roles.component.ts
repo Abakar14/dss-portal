@@ -1,22 +1,22 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { MaterialModule } from '../../../material/material.module';
-import { RouterModule } from '@angular/router';
-import { RoleService } from '../../../services/role.service';
-import { MatChipsModule } from '@angular/material/chips';
-import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { forkJoin } from 'rxjs';
-
+import { RoleService } from '../../../services/role.service';
+import { UserService } from '../../../services/user.service';
+import { CommonModule } from '@angular/common';
+import { MatChipsModule } from '@angular/material/chips';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../../../material/material.module';
 
 @Component({
-  selector: 'bms-manage-users',
+  selector: 'bms-manage-users-roles',
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [MaterialModule, CommonModule, RouterModule, MatChipsModule],
-  templateUrl: './manage-users.component.html',
-  styleUrl: './manage-users.component.scss'
+  templateUrl: './manage-users-roles.component.html',
+  styleUrl: './manage-users-roles.component.scss'
 })
-export class ManageUsersComponent implements OnInit {
+export class ManageUsersRolesComponent {
+
 
   users: any[] = []; // List of users fetched from the backend
   availableRoles: any[] = []; // List of roles fetched from the backend
