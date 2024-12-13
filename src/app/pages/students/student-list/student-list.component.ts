@@ -19,7 +19,7 @@ import { StudentDto } from '../../../model/StudentDto';
 })
 export class StudentListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'matNumber','birthDate','birthPlace', 'gender', 'addedBy','actions']; // All possible columns
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'matNumber', 'birthDate', 'birthPlace', 'gender', 'addedBy', 'actions']; // All possible columns
   columnsToDisplay: string[] = ['id', 'firstName', 'lastName', 'matNumber', 'actions']; // Default displayed columns
   columnNames: { [key: string]: string } = {
     id: 'ID',
@@ -39,7 +39,7 @@ export class StudentListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private studentService: StudentsService, private dialog: MatDialog, private router: Router) {}
+  constructor(private studentService: StudentsService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.loadStudents();
@@ -109,5 +109,5 @@ export class StudentListComponent implements OnInit, AfterViewInit {
   viewStudentDetails(studentId: number): void {
     this.router.navigate(['/students', studentId]);
   }
-  
-  }
+
+}

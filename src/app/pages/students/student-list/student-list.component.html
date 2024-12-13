@@ -1,7 +1,6 @@
 <div class="student-list-container">
   <h2>Student Management</h2>
   <mat-toolbar color="primary" class="toolbar">
-  
     <div class="toolbar-buttons">
       <button mat-raised-button color="accent" [routerLink]="['/students/registration']">
         <mat-icon>person_add</mat-icon> Register Student
@@ -42,11 +41,7 @@
     </mat-table>
   </div>
 
-  <mat-paginator
-    [length]="totalStudents"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
+  <mat-paginator [length]="totalStudents" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
     (page)="onPageChange($event)">
   </mat-paginator>
 </div>
