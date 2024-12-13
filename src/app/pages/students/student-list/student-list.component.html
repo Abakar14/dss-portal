@@ -9,18 +9,31 @@
     <span class="spacer"></span>
     <button class="addColumn" mat-raised-button color="accent" (click)="addColumn()">Add Column</button>
     <button mat-raised-button color="warn" (click)="removeColumn()">Remove Column</button>
+    <button mat-raised-button color="primary" (click)="downloadList()">Download List</button>
+    <button mat-raised-button color="accent" (click)="printList()">Print List</button>
+
   </mat-toolbar>
 
   <div class="table-container">
     <mat-table [dataSource]="students" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
 
-      <!-- Dynamically Rendered Columns -->
-      <ng-container *ngFor="let column of columnsToDisplayWithoutActions" [matColumnDef]="column">
-        <mat-header-cell *matHeaderCellDef class="sticky-header">{{ columnNames[column] }}</mat-header-cell>
-        <mat-cell *matCellDef="let student"> {{ student[column] }}</mat-cell>
+       <!-- Checkbox Column -->
+       <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="toggleSelectAll($event)" [checked]="isAllSelected()" [indeterminate]="isIndeterminate()"></mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let student">
+          <mat-checkbox (change)="toggleSelection(student)" [checked]="isSelected(student)"></mat-checkbox>
+        </mat-cell>
       </ng-container>
 
-      <!-- Actions Column (Explicit) -->
+      <!-- Dynamically Rendered Columns -->
+      <ng-container *ngFor="let column of columnsToDisplayWithoutActions" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef>{{ columnNames[column] }}</mat-header-cell>
+        <mat-cell *matCellDef="let student">{{ student[column] }}</mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let student">
@@ -35,6 +48,31 @@
           </button>
         </mat-cell>
       </ng-container>
+
+     
+      <!-- Dynamically Rendered Columns -->
+      <!-- <ng-container *ngFor="let column of columnsToDisplayWithoutActions" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef class="sticky-header">{{ columnNames[column] }}</mat-header-cell>
+        <mat-cell *matCellDef="let student"> {{ student[column] }}</mat-cell>
+      </ng-container> -->
+
+      
+
+      <!-- Actions Column (Explicit) -->
+      <!-- <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let student">
+          <button mat-icon-button color="primary" (click)="openEditStudentModal(student)" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="confirmDeleteStudent(student.id)" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="viewStudentDetails(student.id)" matTooltip="View">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container> -->
 
       <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
       <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>

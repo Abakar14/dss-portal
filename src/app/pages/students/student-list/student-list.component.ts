@@ -19,8 +19,13 @@ import { StudentDto } from '../../../model/StudentDto';
 })
 export class StudentListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'matNumber', 'birthDate', 'birthPlace', 'gender', 'addedBy', 'actions']; // All possible columns
-  columnsToDisplay: string[] = ['id', 'firstName', 'lastName', 'matNumber', 'actions']; // Default displayed columns
+  displayedColumns: string[] = ['select','id', 'firstName', 'lastName', 'matNumber', 'birthDate', 'birthPlace', 'gender', 'addedBy', 'actions']; // All possible columns
+  //columnsToDisplay: string[] = ['id', 'firstName', 'lastName', 'matNumber', 'actions']; // Default displayed columns
+  columnsToDisplay: string[] = [...this.displayedColumns]; // Default displayed columns
+  columnsToDisplayWithoutActions: string[] = this.columnsToDisplay.filter((col) => col !== 'actions' && col !== 'select');
+
+  selectedStudents: Set<StudentDto> = new Set<StudentDto>();
+
   columnNames: { [key: string]: string } = {
     id: 'ID',
     firstName: 'First Name',
@@ -61,9 +66,9 @@ export class StudentListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  get columnsToDisplayWithoutActions(): string[] {
-    return this.columnsToDisplay.filter((col) => col !== 'actions');
-  }
+  // get columnsToDisplayWithoutActions(): string[] {
+  //   return this.columnsToDisplay.filter((col) => col !== 'actions');
+  // }
 
   addColumn(): void {
     const availableColumns = this.displayedColumns.filter(
@@ -108,6 +113,57 @@ export class StudentListComponent implements OnInit, AfterViewInit {
 
   viewStudentDetails(studentId: number): void {
     this.router.navigate(['/students', studentId]);
+  }
+
+  // Update Selection Logic
+  toggleSelection(student: StudentDto): void {
+    if (this.selectedStudents.has(student)) {
+      this.selectedStudents.delete(student);
+    } else {
+      this.selectedStudents.add(student);
+    }
+  }
+
+
+  isSelected(student: StudentDto): boolean {
+    return this.selectedStudents.has(student);
+  }
+
+  toggleSelectAll(event: any): void {
+    if (event.checked) {
+      this.students.data.forEach((student) => this.selectedStudents.add(student));
+    } else {
+      this.selectedStudents.clear();
+    }
+  }
+
+  isAllSelected(): boolean {
+    return this.students.data.every((student) => this.selectedStudents.has(student));
+  }
+
+  isIndeterminate(): boolean {
+    return this.selectedStudents.size > 0 && !this.isAllSelected();
+  }
+
+  // Download Functionality
+  downloadList(): void {
+    const downloadData = Array.from(this.selectedStudents);
+    console.log('Downloading selected students:', downloadData);
+    const blob = new Blob([JSON.stringify(downloadData, null, 2)], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'student_list.json';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  // Print Functionality
+  printList(): void {
+    const printData = Array.from(this.selectedStudents);
+    console.log('Printing selected students:', printData);
+    // Add logic to generate printable view
+    // Example: Use a new window or print utility library
   }
 
 }
