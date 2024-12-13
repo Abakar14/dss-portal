@@ -65,17 +65,21 @@
   .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    gap: 16px; /* Adds spacing between buttons */
 
     button {
       min-width: 150px;
-      background-color: #1976d2; // Primary blue for buttons
+      //background-color: #1976d2; // Primary blue for buttons
       color: white; // White text for buttons
 
       &:hover {
         background-color: #1565c0; // Darker blue on hover
       }
     }
+  }
+
+  button mat-icon {
+    margin-right: 8px; /* Adds space between the icon and the text */
   }
 
   .file-upload-group {

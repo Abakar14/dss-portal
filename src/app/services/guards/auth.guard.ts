@@ -17,12 +17,17 @@ export const authGuard: CanActivateFn = (route, state) => {
       const userRoles = authService.getUserRoles();
       const hasRequiredRole = requiredRoles.some((role) => userRoles.includes(role));
 
-      if(hasRequiredRole){
-        return true;
-      }else {
+      if (!hasRequiredRole) {
+        console.warn("Access denied: User lacks the required roles.", { requiredRoles, userRoles });
         router.navigate(['access-denied']);
         return false;
       }
+      // if(hasRequiredRole){
+      //   return true;
+      // }else {
+      //   router.navigate(['access-denied']);
+      //   return false;
+      // }
 
     }
 

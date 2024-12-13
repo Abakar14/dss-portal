@@ -39,6 +39,5 @@ export const routes: Routes = [
      ],
   },
 {path: 'access-denied', component: AccessDeniedComponent},
-{ path: '**', redirectTo: '/' },
-  { path: '**', component: NotFoundComponent }, //Wildcard route for a 404 page
+{ path: '**', component: NotFoundComponent }, //Wildcard route for a 404 page
 ];

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MaterialModule } from '../../../material/material.module';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BffService } from '../../../services/bff.service';
 import { DocumentType } from '../../../model/enums/document-type';
 import { StudentDetailsCreateDto } from '../../../model/student-details-create-dto.model';
@@ -13,7 +13,7 @@ import { RelationShip } from '../../../model/relation-ship';
 @Component({
   selector: 'bms-student-registration-form',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterModule],
   providers:[DatePipe],
   templateUrl: './student-registration-form.component.html',
   styleUrls: ['./student-registration-form.component.scss']
@@ -178,14 +178,10 @@ onFileSelected(event: Event, index: number): void {
   }
 }
 
-
-// onFileSelected(event: any, index: number): void {
-//   const file = event.target.files[0];
-//   if (file) {
-//     this.documents.controls[index].get('file')?.setValue(file);
-//   }
-// }
-
+onCancel(): void {
+  console.log("Cancel clicked. Redirecting to student list...");
+  this.router.navigate(['/students']);
+}
 
 
   hasError(groupPath: string, controlName: string, errorName: string): boolean {

@@ -7,8 +7,7 @@ import { StudentRegistrationFormComponent } from './student-registration-form/st
 
 
 export const routes: Routes = [
-//Student list
-{ path: '',component: StudentListComponent}, // Student List
+{ path: '',component: StudentListComponent, pathMatch: 'full'}, // Student List
 { path: 'registration', component: StudentRegistrationFormComponent},  // Student Registration
 { path: ':id', component: StudentDetailsComponent }, // Student Details
 
