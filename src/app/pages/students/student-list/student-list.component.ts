@@ -20,7 +20,6 @@ import { StudentDto } from '../../../model/StudentDto';
 export class StudentListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['select','id', 'firstName', 'lastName', 'matNumber', 'birthDate', 'birthPlace', 'gender', 'addedBy', 'actions']; // All possible columns
-  //columnsToDisplay: string[] = ['id', 'firstName', 'lastName', 'matNumber', 'actions']; // Default displayed columns
   columnsToDisplay: string[] = [...this.displayedColumns]; // Default displayed columns
   columnsToDisplayWithoutActions: string[] = this.columnsToDisplay.filter((col) => col !== 'actions' && col !== 'select');
 
@@ -159,11 +158,52 @@ export class StudentListComponent implements OnInit, AfterViewInit {
   }
 
   // Print Functionality
-  printList(): void {
-    const printData = Array.from(this.selectedStudents);
-    console.log('Printing selected students:', printData);
-    // Add logic to generate printable view
-    // Example: Use a new window or print utility library
+  printList() {
+    const printContent = document.createElement('div');
+    const table = document.createElement('table');
+    table.style.borderCollapse = 'collapse';
+    table.style.width = '100%';
+  
+    // Add table headers based on columnsToDisplay
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    this.columnsToDisplay.forEach(column => {
+      const th = document.createElement('th');
+      th.style.border = '1px solid black';
+      th.style.padding = '8px';
+      th.textContent = this.columnNames[column];
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+  
+    // Add table rows based on data and columnsToDisplay
+    const tbody = document.createElement('tbody');
+    this.students.data.forEach(student => {
+      const row = document.createElement('tr');
+      this.columnsToDisplay.forEach(column => {
+        const td = document.createElement('td');
+        td.style.border = '1px solid black';
+        td.style.padding = '8px';
+       // td.textContent = student[column];
+        row.appendChild(td);
+      });
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+  
+    printContent.appendChild(table);
+    const printWindow = window.open('', '_blank');
+    printWindow?.document.write(printContent.innerHTML);
+    printWindow?.document.close();
+    printWindow?.print();
   }
+  
+  // printList(): void {
+  //   const printData = Array.from(this.selectedStudents);
+  //   console.log('Printing selected students:', printData);
+  //   // Add logic to generate printable view
+  //   // Example: Use a new window or print utility library
+  // }
 
 }
