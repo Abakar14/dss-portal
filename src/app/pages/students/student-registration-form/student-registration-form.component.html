@@ -126,6 +126,15 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Communication Type</mat-label>
+      <mat-select formControlName="communicationType">
+        <mat-option *ngFor="let communicationType of communicationTypes" [value]="communicationType">
+          {{ communicationType }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Relationship</mat-label>
       <mat-select formControlName="relationship">
         <mat-option *ngFor="let relationship of relationships" [value]="relationship">

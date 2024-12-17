@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DSSService } from './dss.service';
 import { StudentDto, StudentUpdateDto } from '../model/StudentDto';
 import { Sort } from '@angular/material/sort';
+import { ReportRequest } from '../model/report-request';
 
 @Injectable({
   providedIn: 'root'
@@ -17,31 +18,62 @@ export class StudentsService {
   constructor(private http: HttpClient, private dssService: DSSService) { }
 
 
+  // getStudents(
+  //   pageIndex: number,
+  //   pageSize: number,
+  //   sort: string = 'firstName',
+  //   order: string = 'asc',
+  //   search: string = ''
+  // ): Observable<any> {
+  //   const headers = this.dssService.getHeaders();
+  
+  //   let params = new HttpParams()
+  //     .set('page', pageIndex.toString())
+  //     .set('size', pageSize.toString())
+  //     .set('sort', `${sort},${order}`);
+  
+  //   // Add search query if provided
+  //   if (search) {
+  //     params = params.set('search', search);
+  //   }
+  
+  //   return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
+  // }
+
+
   getStudents(
-    pageIndex: number,
-    pageSize: number,
-    sort: string = 'firstName',
-    order: string = 'asc',
-    search: string = ''
+    pageIndex: number, 
+    pageSize: number, 
+    sortColumn: string, 
+    sortDirection: string, 
+    searchQuery: string = ''
   ): Observable<any> {
     const headers = this.dssService.getHeaders();
-  
-    let params = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('size', pageSize.toString())
-      .set('sort', `${sort},${order}`);
-  
-    // Add search query if provided
-    if (search) {
-      params = params.set('search', search);
-    }
-  
+      .set('sort', `${sortColumn},${sortDirection}`)
+      .set('search', searchQuery); // Optional search query
+    
+    console.log('Fetching students with params:', { pageIndex, pageSize, sortColumn, sortDirection, searchQuery });
     return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
   }
   
+  
+  // getStudents(pageIndex: number, pageSize: number, sortColumn: string, sortDirection: string, searchQuery: string = '') {
+    
+  //   const headers = this.dssService.getHeaders();
 
-
-
+  //   const params = new HttpParams()
+  //     .set('page', pageIndex.toString())
+  //     .set('size', pageSize.toString())
+  //     .set('sort', `${sortColumn},${sortDirection}`)
+  //     .set('search', searchQuery);
+  
+  //     return this.http.get<any>(`${this.apiUrl}/students`, { headers, params });
+  // }
+  
+  
   searchStudents(filterValue: string, page: number = 0, size: number = 10): Observable<any> {
     
     const headers = this.dssService.getHeaders();
@@ -89,5 +121,14 @@ export class StudentsService {
 
   }
 
+  generateReport(payload: ReportRequest): Observable<Blob> {
+    const headers = this.dssService.getHeaders();
+    
+    return this.http.post(`${this.apiUrl}/students/dynamic-report`, payload, {
+      headers,
+      responseType: 'blob', // Expect a binary file (Blob) from backend
+    });
+  }
+  
 
 }

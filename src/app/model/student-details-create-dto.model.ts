@@ -1,3 +1,4 @@
+import { CommunicationType } from "./enums/communication-type";
 import { ContactLevel } from "./enums/contact-level";
 import { Gender } from "./enums/gender";
 import { RelationShip } from "./relation-ship";
@@ -40,6 +41,7 @@ export interface GuardianCreateDto{
     gender:Gender;
     contactLevel: ContactLevel;
     relationship: RelationShip;
+    communicationType: CommunicationType;
     email: string;
     mobile: string;
     phone: string;

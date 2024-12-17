@@ -9,10 +9,22 @@
     <span class="spacer"></span>
     <button class="addColumn" mat-raised-button color="accent" (click)="addColumn()">Add Column</button>
     <button mat-raised-button color="warn" (click)="removeColumn()">Remove Column</button>
-    <button mat-raised-button color="primary" (click)="downloadList()">Download List</button>
-    <button mat-raised-button color="accent" (click)="printList()">Print List</button>
-
+    <button mat-raised-button color="primary" (click)="downloadList(ReportType.PDF)">Download PDF</button>
+    <button mat-raised-button color="accent" (click)="downloadList(ReportType.EXCEL)">Download Excel</button>
+    <button mat-raised-button color="warn" (click)="downloadList(ReportType.CSV)">Download CSV</button>
+    <button mat-raised-button color="primary" (click)="printList()">Print List</button>
+  
   </mat-toolbar>
+
+  <div class="search-toolbar">
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Search Students</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, ID, or other criteria">
+    </mat-form-field>
+  </div>
+  
+
 
   <div class="table-container">
     <mat-table [dataSource]="students" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
@@ -50,36 +62,20 @@
       </ng-container>
 
      
-      <!-- Dynamically Rendered Columns -->
-      <!-- <ng-container *ngFor="let column of columnsToDisplayWithoutActions" [matColumnDef]="column">
-        <mat-header-cell *matHeaderCellDef class="sticky-header">{{ columnNames[column] }}</mat-header-cell>
-        <mat-cell *matCellDef="let student"> {{ student[column] }}</mat-cell>
-      </ng-container> -->
-
-      
-
-      <!-- Actions Column (Explicit) -->
-      <!-- <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-        <mat-cell *matCellDef="let student">
-          <button mat-icon-button color="primary" (click)="openEditStudentModal(student)" matTooltip="Edit">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="confirmDeleteStudent(student.id)" matTooltip="Delete">
-            <mat-icon>delete</mat-icon>
-          </button>
-          <button mat-icon-button color="accent" (click)="viewStudentDetails(student.id)" matTooltip="View">
-            <mat-icon>visibility</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container> -->
-
-      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+      <!-- Mat Table Header and Rows -->
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
     </mat-table>
   </div>
 
-  <mat-paginator [length]="totalStudents" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-    (page)="onPageChange($event)">
-  </mat-paginator>
+  <mat-paginator
+  [length]="totalStudents"         
+  [pageSize]="10"                 
+  [pageSizeOptions]="[5, 10, 20]" 
+  showFirstLastButtons             
+  (page)="onPageChange($event)">   
+</mat-paginator>
+
+
+
 </div>

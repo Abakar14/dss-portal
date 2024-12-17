@@ -8,6 +8,7 @@ import { DocumentType } from '../../../model/enums/document-type';
 import { StudentDetailsCreateDto } from '../../../model/student-details-create-dto.model';
 import { Gender } from '../../../model/enums/gender';
 import { RelationShip } from '../../../model/relation-ship';
+import { CommunicationType } from '../../../model/enums/communication-type';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class StudentRegistrationFormComponent implements OnInit{
   registrationForm!: FormGroup;
   genders = Object.values(Gender);
   relationships = Object.values(RelationShip);
+  communicationTypes = Object.values(CommunicationType);
   documentTypes = Object.values(DocumentType); // Create a list of document types for selection
 
   constructor(private fb: FormBuilder,  private bffService: BffService, private router: Router, 
@@ -73,6 +75,7 @@ addGuardian() {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     gender: [Gender.UNKNOWN, Validators.required],
+    communicationType: [CommunicationType.UNKNOWN, Validators.required],
     relationship: [RelationShip.Other, Validators.required],
     country: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -117,11 +120,13 @@ onSubmit() {
 
     // Format guardians
     const guardianCreateDtos = formValue.guardians.map((guardian: any) => {
-
+      //const guardianCommunicationTypeKey = Object.keys(CommunicationType).find(key => CommunicationType[key as keyof typeof CommunicationType] === guardian.communicationType);
+     
       const guardianGenderKey = Object.keys(Gender).find(key => Gender[key as keyof typeof Gender] === guardian.gender);
       return {
         ...guardian,
         gender: guardianGenderKey,
+        //communicationType: guardianCommunicationTypeKey,
       };
     });
 
