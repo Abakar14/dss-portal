@@ -99,14 +99,6 @@ export class StudentListComponent implements OnInit, AfterViewInit {
   }
   
 
-  // addColumn(): void {
-  //   const availableColumns = this.displayedColumns.filter(
-  //     (column) => !this.columnsToDisplay.includes(column) && column !== 'actions' // Exclude actions
-  //   );
-  //   if (availableColumns.length) {
-  //     this.columnsToDisplay.splice(this.columnsToDisplay.length - 1, 0, availableColumns[0]); // Add before actions
-  //   }
-  // }
 
   removeColumn(): void {
     const removableColumns = this.columnsToDisplay.filter(
@@ -121,12 +113,7 @@ export class StudentListComponent implements OnInit, AfterViewInit {
     }
   }
   
-  // removeColumn(): void {
-  //   const removableColumns = this.columnsToDisplay.filter((column) => column !== 'actions'); // Exclude actions
-  //   if (removableColumns.length) {
-  //     this.columnsToDisplay.splice(this.columnsToDisplay.indexOf(removableColumns[removableColumns.length - 1]), 1);
-  //   }
-  // }
+
 
   onSortChange(event: { active: string; direction: string }): void {
     const { active, direction } = event;

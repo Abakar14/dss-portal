@@ -1,21 +1,53 @@
 <div class="student-list-container">
   <h2>Student Management</h2>
+
+  <!-- Toolbar -->
   <mat-toolbar color="primary" class="toolbar">
     <div class="toolbar-buttons">
+      <!-- Primary Action: Register Student -->
       <button mat-raised-button color="accent" [routerLink]="['/students/registration']">
         <mat-icon>person_add</mat-icon> Register Student
       </button>
     </div>
+
     <span class="spacer"></span>
-    <button class="addColumn" mat-raised-button color="accent" (click)="addColumn()">Add Column</button>
-    <button mat-raised-button color="warn" (click)="removeColumn()">Remove Column</button>
-    <button mat-raised-button color="primary" (click)="downloadList(ReportType.PDF)">Download PDF</button>
-    <button mat-raised-button color="accent" (click)="downloadList(ReportType.EXCEL)">Download Excel</button>
-    <button mat-raised-button color="warn" (click)="downloadList(ReportType.CSV)">Download CSV</button>
-    <button mat-raised-button color="primary" (click)="printList()">Print List</button>
-  
+
+    <!-- Dropdown Menu for Export Actions -->
+    <button mat-raised-button [matMenuTriggerFor]="exportMenu" color="primary">
+      <mat-icon>download</mat-icon> Export
+    </button>
+    <mat-menu #exportMenu="matMenu">
+      <button mat-menu-item (click)="downloadList(ReportType.PDF)">
+        <mat-icon>picture_as_pdf</mat-icon> Download PDF
+      </button>
+      <button mat-menu-item (click)="downloadList(ReportType.EXCEL)">
+        <mat-icon>table_chart</mat-icon> Download Excel
+      </button>
+      <button mat-menu-item (click)="downloadList(ReportType.CSV)">
+        <mat-icon>file_copy</mat-icon> Download CSV
+      </button>
+    </mat-menu>
+
+    <!-- Dropdown Menu for Column Actions -->
+    <button mat-raised-button [matMenuTriggerFor]="columnMenu" color="accent">
+      <mat-icon>view_column</mat-icon> Columns
+    </button>
+    <mat-menu #columnMenu="matMenu">
+      <button mat-menu-item (click)="addColumn()">
+        <mat-icon>add</mat-icon> Add Column
+      </button>
+      <button mat-menu-item (click)="removeColumn()">
+        <mat-icon>remove</mat-icon> Remove Column
+      </button>
+    </mat-menu>
+
+    <!-- Print Button -->
+    <button mat-raised-button color="warn" (click)="printList()">
+      <mat-icon>print</mat-icon> Print List
+    </button>
   </mat-toolbar>
 
+  <!-- Search Bar -->
   <div class="search-toolbar">
     <mat-form-field appearance="outline" class="search-bar">
       <mat-label>Search Students</mat-label>
@@ -23,14 +55,13 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, ID, or other criteria">
     </mat-form-field>
   </div>
-  
 
-
+  <!-- Table -->
   <div class="table-container">
     <mat-table [dataSource]="students" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
 
-       <!-- Checkbox Column -->
-       <ng-container matColumnDef="select">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
         <mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="toggleSelectAll($event)" [checked]="isAllSelected()" [indeterminate]="isIndeterminate()"></mat-checkbox>
         </mat-header-cell>
@@ -61,21 +92,18 @@
         </mat-cell>
       </ng-container>
 
-     
-      <!-- Mat Table Header and Rows -->
-    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+      <!-- Header and Row -->
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
     </mat-table>
   </div>
 
+  <!-- Paginator -->
   <mat-paginator
-  [length]="totalStudents"         
-  [pageSize]="10"                 
-  [pageSizeOptions]="[5, 10, 20]" 
-  showFirstLastButtons             
-  (page)="onPageChange($event)">   
-</mat-paginator>
-
-
-
+    [length]="totalStudents"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    (page)="onPageChange($event)">
+  </mat-paginator>
 </div>
