@@ -5,11 +5,10 @@ import { RoleService } from '../../../services/role.service';
 import { RoleDto } from '../../../model/user';
 
 @Component({
-  selector: 'bms-add-edit-role-dialog',
-  standalone: true,
-  imports: [],
-  templateUrl: './add-edit-role-dialog.component.html',
-  styleUrl: './add-edit-role-dialog.component.scss'
+    selector: 'bms-add-edit-role-dialog',
+    imports: [],
+    templateUrl: './add-edit-role-dialog.component.html',
+    styleUrl: './add-edit-role-dialog.component.scss'
 })
 export class AddEditRoleDialogComponent implements OnInit {
 

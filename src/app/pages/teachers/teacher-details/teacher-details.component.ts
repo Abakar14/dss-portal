@@ -5,11 +5,10 @@ import { TeacherDto } from '../../../model/teacher';
 import { TeacherService } from '../../../services/teacher.service';
 
 @Component({
-  selector: 'bms-teacher-details',
-  standalone: true,
-  imports: [RouterModule, CommonModule],
-  templateUrl: './teacher-details.component.html',
-  styleUrl: './teacher-details.component.scss'
+    selector: 'bms-teacher-details',
+    imports: [RouterModule, CommonModule],
+    templateUrl: './teacher-details.component.html',
+    styleUrl: './teacher-details.component.scss'
 })
 export class TeacherDetailsComponent implements OnInit{
 

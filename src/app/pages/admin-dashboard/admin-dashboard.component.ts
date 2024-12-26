@@ -9,11 +9,10 @@ import { RouterModule } from '@angular/router';
 import { RoleService } from '../../services/role.service';
 
 @Component({
-  selector: 'bms-admin-dashboard',
-  standalone: true,
-  imports: [MaterialModule, CommonModule, RouterModule],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+    selector: 'bms-admin-dashboard',
+    imports: [MaterialModule, CommonModule, RouterModule],
+    templateUrl: './admin-dashboard.component.html',
+    styleUrl: './admin-dashboard.component.scss'
 })
 export class AdminDashboardComponent  implements OnInit{
   totalUsers: number = 0;

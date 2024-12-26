@@ -9,11 +9,10 @@ import { Role, RoleDto, UserCreateDto } from '../../../model/user';
 import { RoleService } from '../../../services/role.service';
 
 @Component({
-  selector: 'bms-add-edit-user-dialog',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
-  templateUrl: './add-edit-user-dialog.component.html',
-  styleUrl: './add-edit-user-dialog.component.scss'
+    selector: 'bms-add-edit-user-dialog',
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+    templateUrl: './add-edit-user-dialog.component.html',
+    styleUrl: './add-edit-user-dialog.component.scss'
 })
 export class AddEditUserDialogComponent implements OnInit {
 

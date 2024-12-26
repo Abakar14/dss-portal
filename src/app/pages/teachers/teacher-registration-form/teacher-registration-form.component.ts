@@ -12,12 +12,11 @@ import { DocumentType } from '../../../model/enums/document-type';
 
 
 @Component({
-  selector: 'bms-teacher-registration-form',
-  standalone: true,
-  imports: [CommonModule, MaterialModule],
-  providers:[DatePipe],
-  templateUrl: './teacher-registration-form.component.html',
-  styleUrl: './teacher-registration-form.component.scss'
+    selector: 'bms-teacher-registration-form',
+    imports: [CommonModule, MaterialModule],
+    providers: [DatePipe],
+    templateUrl: './teacher-registration-form.component.html',
+    styleUrl: './teacher-registration-form.component.scss'
 })
 export class TeacherRegistrationFormComponent implements OnInit{
 

@@ -8,11 +8,10 @@ import { RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'bms-manage-roles-permissions',
-  standalone: true,
-  imports: [MaterialModule, CommonModule, RouterModule],
-  templateUrl: './manage-roles-permissions.component.html',
-  styleUrl: './manage-roles-permissions.component.scss'
+    selector: 'bms-manage-roles-permissions',
+    imports: [MaterialModule, CommonModule, RouterModule],
+    templateUrl: './manage-roles-permissions.component.html',
+    styleUrl: './manage-roles-permissions.component.scss'
 })
 export class ManageRolesPermissionsComponent implements OnInit {
 

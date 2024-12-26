@@ -6,11 +6,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaterialModule } from '../../../material/material.module';
 
 @Component({
-  selector: 'bms-add-edit-teacher-modal',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
-  templateUrl: './add-edit-teacher-modal.component.html',
-  styleUrl: './add-edit-teacher-modal.component.scss'
+    selector: 'bms-add-edit-teacher-modal',
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+    templateUrl: './add-edit-teacher-modal.component.html',
+    styleUrl: './add-edit-teacher-modal.component.scss'
 })
 export class AddEditTeacherModalComponent {
 

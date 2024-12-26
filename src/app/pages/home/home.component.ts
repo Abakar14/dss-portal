@@ -9,11 +9,10 @@ import { Role, UserProfile } from '../../model/user';
 
 
 @Component({
-  selector: 'bms-home',
-  standalone: true,
-  imports: [MaterialModule, CommonModule, RouterModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'bms-home',
+    imports: [MaterialModule, CommonModule, RouterModule],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
 

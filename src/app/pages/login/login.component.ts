@@ -7,11 +7,10 @@ import { MaterialModule } from '../../material/material.module';
 
 
 @Component({
-  selector: 'bms-login',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, MaterialModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'bms-login',
+    imports: [ReactiveFormsModule, CommonModule, MaterialModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent{
   

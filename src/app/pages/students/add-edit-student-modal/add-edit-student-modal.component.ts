@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material/material.module';
 
 @Component({
-  selector: 'bms-add-edit-student-modal',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
-  templateUrl: './add-edit-student-modal.component.html',
-  styleUrl: './add-edit-student-modal.component.scss'
+    selector: 'bms-add-edit-student-modal',
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+    templateUrl: './add-edit-student-modal.component.html',
+    styleUrl: './add-edit-student-modal.component.scss'
 })
 export class AddEditStudentModalComponent implements OnInit{
 

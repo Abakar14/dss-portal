@@ -11,11 +11,10 @@ import { AddEditStudentModalComponent } from '../add-edit-student-modal/add-edit
 
 
 @Component({
-  selector: 'bms-student-details',
-  standalone: true,
-  imports: [RouterModule, CommonModule, MaterialModule],
-  templateUrl: './student-details.component.html',
-  styleUrl: './student-details.component.scss'
+    selector: 'bms-student-details',
+    imports: [RouterModule, CommonModule, MaterialModule],
+    templateUrl: './student-details.component.html',
+    styleUrl: './student-details.component.scss'
 })
 export class StudentDetailsComponent implements OnInit {
 

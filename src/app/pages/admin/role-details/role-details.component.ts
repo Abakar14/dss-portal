@@ -8,12 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
-  selector: 'bms-role-details',
-  standalone: true,
-  imports: [CommonModule, MaterialModule, RouterModule,   MatIconModule,
-    MatListModule,],
-  templateUrl: './role-details.component.html',
-  styleUrl: './role-details.component.scss'
+    selector: 'bms-role-details',
+    imports: [CommonModule, MaterialModule, RouterModule, MatIconModule,
+        MatListModule,],
+    templateUrl: './role-details.component.html',
+    styleUrl: './role-details.component.scss'
 })
 export class RoleDetailsComponent implements OnInit {
 

@@ -12,12 +12,11 @@ import { CommunicationType } from '../../../model/enums/communication-type';
 
 
 @Component({
-  selector: 'bms-student-registration-form',
-  standalone: true,
-  imports: [CommonModule, MaterialModule, RouterModule],
-  providers:[DatePipe],
-  templateUrl: './student-registration-form.component.html',
-  styleUrls: ['./student-registration-form.component.scss']
+    selector: 'bms-student-registration-form',
+    imports: [CommonModule, MaterialModule, RouterModule],
+    providers: [DatePipe],
+    templateUrl: './student-registration-form.component.html',
+    styleUrls: ['./student-registration-form.component.scss']
 })
 export class StudentRegistrationFormComponent implements OnInit{
 

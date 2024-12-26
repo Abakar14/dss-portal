@@ -11,11 +11,10 @@ import { TeacherDto } from '../../../model/teacher';
 import { AddEditTeacherModalComponent } from '../add-edit-teacher-modal/add-edit-teacher-modal.component';
 
 @Component({
-  selector: 'bms-teachers',
-  standalone: true,
-  imports: [MaterialModule, RouterModule, CommonModule],
-  templateUrl: './teachers.component.html',
-  styleUrl: './teachers.component.scss'
+    selector: 'bms-teachers',
+    imports: [MaterialModule, RouterModule, CommonModule],
+    templateUrl: './teachers.component.html',
+    styleUrl: './teachers.component.scss'
 })
 export class TeachersComponent {
 

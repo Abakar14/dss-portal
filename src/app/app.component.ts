@@ -9,14 +9,12 @@ import { HeaderComponent } from './pages/shared/header/header.component';
 
 
 @Component({
-  selector: 'bms-root',
-  standalone: true,
-  imports: [CommonModule, 
-    RouterOutlet, MaterialModule, HeaderComponent,FooterComponent, SidebarComponent
-  
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'bms-root',
+    imports: [CommonModule,
+        RouterOutlet, MaterialModule, HeaderComponent, FooterComponent, SidebarComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'dss-portal';

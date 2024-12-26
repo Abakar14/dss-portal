@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
 
 @Component({
-  selector: 'bms-documents',
-  standalone: true,
-  imports: [MaterialModule],
-  templateUrl: './documents.component.html',
-  styleUrl: './documents.component.scss'
+    selector: 'bms-documents',
+    imports: [MaterialModule],
+    templateUrl: './documents.component.html',
+    styleUrl: './documents.component.scss'
 })
 export class DocumentsComponent {
 

@@ -8,12 +8,11 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
 
 @Component({
-  selector: 'bms-manage-users-roles',
-  standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [MaterialModule, CommonModule, RouterModule, MatChipsModule],
-  templateUrl: './manage-users-roles.component.html',
-  styleUrl: './manage-users-roles.component.scss'
+    selector: 'bms-manage-users-roles',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [MaterialModule, CommonModule, RouterModule, MatChipsModule],
+    templateUrl: './manage-users-roles.component.html',
+    styleUrl: './manage-users-roles.component.scss'
 })
 export class ManageUsersRolesComponent {
 

@@ -4,11 +4,10 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { MaterialModule } from '../../material/material.module';
 
 @Component({
-  selector: 'bms-forgot-password',
-  standalone: true,
-  imports: [CommonModule,MaterialModule,  ReactiveFormsModule],
-  templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.scss'
+    selector: 'bms-forgot-password',
+    imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+    templateUrl: './forgot-password.component.html',
+    styleUrl: './forgot-password.component.scss'
 })
 export class ForgotPasswordComponent {
 

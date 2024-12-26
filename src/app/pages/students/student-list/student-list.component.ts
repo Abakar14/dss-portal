@@ -13,11 +13,10 @@ import { ReportType } from '../../../model/enums/report-type';
 import { ReportRequest } from '../../../model/report-request';
 
 @Component({
-  selector: 'bms-student-list',
-  standalone: true,
-  imports: [MaterialModule, RouterModule, CommonModule],
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.scss']
+    selector: 'bms-student-list',
+    imports: [MaterialModule, RouterModule, CommonModule],
+    templateUrl: './student-list.component.html',
+    styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent implements OnInit, AfterViewInit {
 

@@ -9,12 +9,11 @@ import { forkJoin } from 'rxjs';
 
 
 @Component({
-  selector: 'bms-manage-users',
-  standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [MaterialModule, CommonModule, RouterModule, MatChipsModule],
-  templateUrl: './manage-users.component.html',
-  styleUrl: './manage-users.component.scss'
+    selector: 'bms-manage-users',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [MaterialModule, CommonModule, RouterModule, MatChipsModule],
+    templateUrl: './manage-users.component.html',
+    styleUrl: './manage-users.component.scss'
 })
 export class ManageUsersComponent implements OnInit {
 

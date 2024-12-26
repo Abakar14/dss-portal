@@ -6,12 +6,10 @@ import { AuthenticationService } from '../../../services/authentication.service'
 
 
 @Component({
-  selector: 'bms-header',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MaterialModule],
-    
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'bms-header',
+    imports: [CommonModule, RouterModule, MaterialModule],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
    // Reference to the sidenav component

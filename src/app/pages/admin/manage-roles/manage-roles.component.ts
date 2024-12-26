@@ -9,11 +9,10 @@ import { RoleDto } from '../../../model/user';
 import { RoleDetailsComponent } from '../role-details/role-details.component';
 
 @Component({
-  selector: 'bms-manage-roles',
-  standalone: true,
-  imports: [MaterialModule, RouterModule],
-  templateUrl: './manage-roles.component.html',
-  styleUrl: './manage-roles.component.scss'
+    selector: 'bms-manage-roles',
+    imports: [MaterialModule, RouterModule],
+    templateUrl: './manage-roles.component.html',
+    styleUrl: './manage-roles.component.scss'
 })
 export class ManageRolesComponent {
 
