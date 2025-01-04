@@ -35,6 +35,8 @@ export class LoginComponent{
   get password() {
     return this.loginForm.get('password');
   }
+
+
   onSubmit() {
     if (this.loginForm.invalid) {
       console.log("onSubmit invalid");
@@ -58,39 +60,9 @@ export class LoginComponent{
       }
     );
   }
-  
-//   onSubmit() {
-//   if(this.loginForm.invalid){
-//     console.log("onSubmit invalid")
-//     return;
-//    }
-
-//    const { username, password } = this.loginForm.value;
-
-//       // Handle form submission
-//      this.authService.login(username, password).subscribe(
-//           (success) => {
-//                 if(success){
-//                  if(this.router.url !== '/'){
-//                   this.router.navigate(['/']); 
-
-//                  }
-//                   //this.router.navigate(['/']);                 
-//                 }else{
-//                   this.errorMessage = "Invalid credentials";
-//                 }
-//           },
-//           () => {
-//             this.errorMessage = "Login failed";
-//           }
-//       )      
-// }
-
 
 togglePasswordVisibility(): void {
   this.hidePassword = !this.hidePassword;
 }
-
-
 
 }

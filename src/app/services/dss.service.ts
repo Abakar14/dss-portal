@@ -12,7 +12,7 @@ export class DSSService {
   getHeaders():HttpHeaders{
  
     return  new HttpHeaders({
-      'Authorization':`Bearer ${this.authService.getToken()}`,
+      'Authorization':`Bearer ${this.authService.getAccessToken}`,
       'Content-Type': 'application/json'     
       }); 
 
@@ -22,7 +22,7 @@ export class DSSService {
   getHeadersWithFormData():HttpHeaders{
  
     return  new HttpHeaders({
-      'Authorization':`Bearer ${this.authService.getToken()}`,
+      'Authorization':`Bearer ${this.authService.getAccessToken}`,
       'accept': 'application/json'
          
       }); 
@@ -33,7 +33,7 @@ export class DSSService {
   getHeadersToken():HttpHeaders{
  
     return  new HttpHeaders({
-      'Authorization':`Bearer ${this.authService.getToken()}`        
+      'Authorization':`Bearer ${this.authService.getAccessToken()}`        
       }); 
 
   }
