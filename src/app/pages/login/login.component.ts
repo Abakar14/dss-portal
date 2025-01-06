@@ -45,20 +45,20 @@ export class LoginComponent{
   
     const { username, password } = this.loginForm.value;
   
-    this.authService.login(username, password).subscribe(
-      (success) => {
-        if (success) {
-          // Retrieve the returnUrl from query parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-          this.router.navigate([returnUrl]); // Redirect to the returnUrl
-        } else {
-          this.errorMessage = "Invalid credentials";
-        }
-      },
-      () => {
-        this.errorMessage = "Login failed";
-      }
-    );
+    // this.authService.login(username, password).subscribe(
+    //   () => {
+    //     //if () {
+    //       // Retrieve the returnUrl from query parameters or default to '/'
+    //       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    //       this.router.navigate([returnUrl]); // Redirect to the returnUrl
+    //     //} else {
+    //       this.errorMessage = "Invalid credentials";
+    //     //}
+    //   },
+    //   () => {
+    //     this.errorMessage = "Login failed";
+    //   }
+    // );
   }
 
 togglePasswordVisibility(): void {

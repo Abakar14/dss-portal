@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'bms-sidebar',
-    imports: [MaterialModule, RouterOutlet],
+    imports: [MaterialModule],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.scss'
 })

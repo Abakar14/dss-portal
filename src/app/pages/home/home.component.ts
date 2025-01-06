@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
         console.log("User Roles: ", this.userRoles);
         console.log("User Permissions: ", this.userPermissions);
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching user profile:', error);
         this.isLoading = false;
        
