@@ -11,8 +11,7 @@ import { HeaderComponent } from './pages/shared/header/header.component';
 @Component({
     selector: 'bms-root',
     imports: [CommonModule,
-        RouterOutlet, MaterialModule, HeaderComponent, FooterComponent, SidebarComponent
-    ],
+    RouterOutlet, MaterialModule, HeaderComponent, FooterComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

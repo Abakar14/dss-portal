@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../../material/material.module';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'bms-sidebar',
