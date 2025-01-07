@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MaterialModule } from './material/material.module';
-import { SidebarComponent } from './pages/shared/sidebar/sidebar.component';
 import { FooterComponent } from './pages/shared/footer/footer.component';
 import { AuthenticationService } from './services/authentication.service';
 import { CommonModule } from '@angular/common';
